@@ -1,7 +1,7 @@
 var App = angular.module('App', ['ngRoute', 'ngAnimate']);
 
 App.config(
-    function($routeProvider,$locationProvider) {
+    function($routeProvider, $locationProvider, $provide) {
         
         $routeProvider
         
@@ -9,21 +9,21 @@ App.config(
         .when('/', {
             title: 'Home',
             templateUrl: 'partials/home.html',
-            controller: 'homeCtrl'
+            controller: 'HomeCtrl'
         })
         
         //live page
         .when('/live', {
             title: 'Live',
             templateUrl: 'partials/live.html',
-            controller: 'liveCtrl'
+            controller: 'LiveCtrl'
         })
         
         //highlight page
         .when('/highlight', {
             title: 'Highlight',
             templateUrl: 'partials/highlight.html',
-            controller: 'highlightCtrl'
+            controller: 'HighlightCtrl'
         })
         
         .otherwise({
@@ -32,6 +32,9 @@ App.config(
         
         // use the HTML5 History API
         $locationProvider.html5Mode(true);
+        
+        //API root
+        $provide.value("apiRoot", "http://localhost/nobar/models/get-api.php?l=");
         
     }
 );
@@ -46,23 +49,28 @@ App.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 
-
-
 //-- HOME
 
-App.controller('homeCtrl', function($scope) {
+App.controller('HomeCtrl', function($scope, $http, apiRoot) {
+    
+    $http
+        .jsonp(apiRoot+"aHR0cDovL2xvY2FsaG9zdC9ub2Jhci9tb2RlbHMvYWpheC1nZXQucGhwP2E9bWF0Y2gmYj1s&callback=JSON_CALLBACK")
+        .then(function(response) {
+            $scope.matchs = response.data;
+            console.log(response.data);
+        });
     
 });
 
 //-- LIVE
 
-App.controller('liveCtrl', function($scope) {
+App.controller('LiveCtrl', function($scope) {
     
 });
 
 //-- HIGHLIGHT
 
-App.controller('highlightCtrl', function($scope) {
+App.controller('HighlightCtrl', function($scope) {
     
 });
 
