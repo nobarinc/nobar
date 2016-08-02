@@ -1,4 +1,16 @@
-<div ng-repeat="match in matchs"> 
-    {{match.mid}}
-    {{match.mth.tnm}}
+<header class="bar bar-nav">
+    <h1 class="title">Nobar.co</h1>
+</header>
+<div class="content">
+    <p class="content-padded">Thanks for downloading Ratchet. This is an example HTML page that's linked up to compiled Ratchet CSS and JS, has the proper meta tags and the HTML structure. Need some more help before you start filling this with your own content? Check out some Ratchet resources:</p>
+    <div class="card">
+        <ul class="table-view">
+            <li class="table-view-cell" ng-repeat="match in matchs">
+                <a class="push-right" href="#watch/{{match.mid}}">
+                    <strong>{{match.mid}} {{match.mth.tnm}} vs  {{match.mta.tnm}}</strong>
+                </a>
+            </li>
+        </ul>
+    </div>
 </div>
+

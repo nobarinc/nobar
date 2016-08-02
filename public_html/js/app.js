@@ -9,21 +9,28 @@ App.config(
         .when('/', {
             title: 'Home',
             templateUrl: 'partials/home.html',
-            controller: 'HomeCtrl'
+            controller: 'homeCtrl'
         })
         
         //live page
         .when('/live', {
             title: 'Live',
             templateUrl: 'partials/live.html',
-            controller: 'LiveCtrl'
+            controller: 'liveCtrl'
         })
         
         //highlight page
         .when('/highlight', {
             title: 'Highlight',
             templateUrl: 'partials/highlight.html',
-            controller: 'HighlightCtrl'
+            controller: 'highlightCtrl'
+        })
+        
+        //watch page
+        .when('/watch/:id', {
+            title: 'Watch',
+            templateUrl: 'partials/watch.html',
+            controller: 'watchCtrl'
         })
         
         .otherwise({
@@ -31,7 +38,7 @@ App.config(
         });
         
         // use the HTML5 History API
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
         
         //API root
         $provide.value("apiRoot", "http://localhost/nobar/models/get-api.php?l=");
@@ -49,9 +56,24 @@ App.run(['$location', '$rootScope', function($location, $rootScope) {
     });
 }]);
 
+App.directive('backButton', function(){
+    return {
+        restrict: 'A',
+
+        link: function(scope, element, attrs) {
+            element.bind('click', goBack);
+
+            function goBack() {
+                history.back();
+                scope.$apply();
+            }
+        }
+    }
+});
+
 //-- HOME
 
-App.controller('HomeCtrl', function($scope, $http, apiRoot) {
+App.controller('homeCtrl', function($scope, $http, apiRoot) {
     
     $http
         .jsonp(apiRoot+"aHR0cDovL2xvY2FsaG9zdC9ub2Jhci9tb2RlbHMvYWpheC1nZXQucGhwP2E9bWF0Y2gmYj1s&callback=JSON_CALLBACK")
@@ -64,13 +86,21 @@ App.controller('HomeCtrl', function($scope, $http, apiRoot) {
 
 //-- LIVE
 
-App.controller('LiveCtrl', function($scope) {
+App.controller('liveCtrl', function($scope) {
     
 });
 
 //-- HIGHLIGHT
 
-App.controller('HighlightCtrl', function($scope) {
+App.controller('highlightCtrl', function($scope) {
+    
+});
+
+//-- WATCH
+
+App.controller('watchCtrl', function($scope, $routeParams) {
+    
+    console.log($routeParams.id);
     
 });
 

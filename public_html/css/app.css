@@ -7,3 +7,35 @@ and open the template in the editor.
     Created on : Aug 1, 2016, 6:33:34 AM
     Author     : Anonymous
 */
+
+body {
+    right: 15%;
+    left: 15%;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-bottom: none;
+    background-color: #f5f5f5;
+}
+
+.bar {
+    right: 15%;
+    left: 15%;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+/* WATCH */
+
+.card-watch {
+    border-radius: 0;
+    
+}
+
+.iframe-watch {
+    border: none;
+    background: #222;
+    width: 100%;
+    min-height: 300px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
