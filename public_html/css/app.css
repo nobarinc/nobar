@@ -7,8 +7,14 @@ and open the template in the editor.
     Created on : Aug 1, 2016, 6:33:34 AM
     Author     : Anonymous
 */
+.bar {
+    right: 15%;
+    left: 15%;
+    border: 1px solid #ddd;
+    border-top: none;
+}
 
-body {
+.content {
     right: 15%;
     left: 15%;
     border: 1px solid #ddd;
@@ -17,25 +23,142 @@ body {
     background-color: #f5f5f5;
 }
 
-.bar {
-    right: 15%;
-    left: 15%;
-    border: 1px solid #ddd;
-    border-top: none;
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* HOME */
+
+.segmented-control-home {
+    max-width: 40%;
+}
+
+/* LIVE */
+
+.table-view-live .team-home,
+.table-view-live .team-away,
+.table-view-live .team-vs{
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+    font-size: 13px;
+    width: 25%;
+    text-align: center;
+    line-height: 50px;
+}
+
+.table-view-live .team-vs {
+    width: 5%;
+    text-align: center;
+}
+
+.img-team {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    float: left;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.table-view-live .team-home .img-team {
+    float: right;
+}
+
+.img-team img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 /* WATCH */
 
+.bar-watch {
+    left: 0;
+    right: 0;
+}
+
+.content-watch {
+    left: 0;
+    right: 0;
+    background-color: #111;
+    border-color: #000;
+}
+
+.segmented-control-watch {
+    max-width: 20%;
+}
+
+.title-watch {
+    color: #428bca;
+    text-shadow: 0 0 10px #09c;
+}
+
 .card-watch {
     border-radius: 0;
-    
 }
 
 .iframe-watch {
     border: none;
     background: #222;
-    width: 100%;
-    min-height: 300px;
+    width: 400px;
+    height: 300px;
     box-shadow: none;
     -webkit-box-shadow: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
+
+
+/* ================ ON MOBILE ================ */
+
+@media only screen and (max-width: 1030px) {
+    
+    .bar {
+        right: 0;
+        left: 0;
+        border: none;
+    }
+
+    .content {
+        right: 0;
+        left: 0;
+        border: none;
+    }
+    
+    /* LIVE MOBILE */
+    
+    .table-view-live .team-home,
+    .table-view-live .team-away,
+    .table-view-live .team-vs {
+        width: auto;
+        line-height: 40px;
+    }
+    
+    .table-view-live .team-home .team-home-name,
+    .table-view-live .team-away .team-away-name {
+        display: none;
+    }
+    
+    .img-team {
+        width: 40px;
+        height: 40px;
+    }
+    
+}
+
+
+
+
+

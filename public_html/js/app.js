@@ -43,17 +43,28 @@ App.config(
         //API root
         $provide.value("apiRoot", "http://localhost/nobar/models/get-api.php?l=");
         
+        //API match
+        $provide.value("apiMatch", "http://localhost/nobar/models/get-api.php?l=aHR0cDovL2xvY2FsaG9zdC9ub2Jhci9tb2RlbHMvYWpheC1nZXQucGhwP2E9bWF0Y2gmYj1s&callback=JSON_CALLBACK");
+        
+        
     }
 );
 
 App.run(['$location', '$rootScope', function($location, $rootScope) {
-    $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-
-        if (current.hasOwnProperty('$$route')) {
-            $rootScope.title = current.$$route.title;
-        }
         
-    });
+    $rootScope
+    
+        .$on('$routeChangeSuccess', function (event, current, previous) {
+
+            if (current.hasOwnProperty('$$route')) {
+                $rootScope.title = current.$$route.title;
+                $rootScope.imageBase = "http://localhost/nobar/assets/photos/";
+            }
+
+        })
+        
+        
+    
 }]);
 
 App.directive('backButton', function(){
@@ -71,36 +82,72 @@ App.directive('backButton', function(){
     }
 });
 
+App.directive('includeReplace', function () {
+    return {
+        require: 'ngInclude',
+        restrict: 'A', /* optional */
+        link: function (scope, el, attrs) {
+            el.replaceWith(el.children());
+        }
+    };
+});
+
 //-- HOME
 
-App.controller('homeCtrl', function($scope, $http, apiRoot) {
+App.controller('homeCtrl', function($scope, $http, apiMatch) {
     
     $http
-        .jsonp(apiRoot+"aHR0cDovL2xvY2FsaG9zdC9ub2Jhci9tb2RlbHMvYWpheC1nZXQucGhwP2E9bWF0Y2gmYj1s&callback=JSON_CALLBACK")
+        .jsonp(apiMatch)
         .then(function(response) {
             $scope.matchs = response.data;
-            console.log(response.data);
         });
     
 });
 
 //-- LIVE
 
-App.controller('liveCtrl', function($scope) {
-    
+App.controller('liveCtrl', function($scope, $http, apiMatch) {
+    $http
+        .jsonp(apiMatch)
+        .then(function(response) {
+            $scope.matchs = response.data;
+        });
 });
 
 //-- HIGHLIGHT
 
-App.controller('highlightCtrl', function($scope) {
-    
+App.controller('highlightCtrl', function($scope, $http, apiMatch) {
+    $http
+        .jsonp(apiMatch)
+        .then(function(response) {
+            $scope.matchs = response.data;
+        });
 });
 
 //-- WATCH
 
-App.controller('watchCtrl', function($scope, $routeParams) {
+App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
     
-    console.log($routeParams.id);
+    $http
+        .jsonp(apiMatch)
+        .then(function(response) { 
+            for(var i=0; i<response.data.length; i++){
+                if (response.data[i]["mid"] == $routeParams.id){
+                    $scope.match = response.data[i];
+                    $scope.urls = response.data[i]["url"];
+                }
+            }
+            angular.element(document.querySelector('#playerarea')).ready(function () {
+                $scope.loadServer($scope.match.url[0].urlk, $scope.match.url[0].urwd, $scope.match.url[0].urhg);
+            });
+        });
+        
+    $scope.loadServer = function(url,width,height){
+        angular.element(document.querySelector('#playerarea'))
+            .attr('src',url)
+            .css('width',width+'px')
+            .css('height',height+'px');
+    };
     
 });
 

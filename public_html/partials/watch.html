@@ -1,13 +1,18 @@
-<header class="bar bar-nav">
+<header class="bar bar-nav bar-watch">
     <a href back-button class="pull-left">
         <span class="icon icon-left-nav"></span>
     </a>
-    <h1 class="title">Nonton</h1>
+    <h1 class="title title-watch">{{match.mth.tnm}} VS {{match.mta.tnm}}</h1>
+    <div class="segmented-control segmented-control-watch pull-right">
+        <a id="server" class="control-item cursor-pointer " ng-repeat="url in urls" ng-click="loadServer(url.urlk, url.urwd, url.urhg)" >
+            Server {{$index+1}}
+        </a>
+    </div>
 </header>
-<div class="content">
-    <iframe class="iframe-watch">
-
-    </iframe>
+<div class="content content-watch">
+    <embed id="playerarea" class="iframe-watch">
+        
+    </embed>
 </div>
 
 

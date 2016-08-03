@@ -1,0 +1,15 @@
+<ng-include src="'partials/header_1.html'" include-replace></ng-include>
+<div class="content">
+    <p class="content-padded">
+        Highlight
+    </p>
+    <div class="card">
+        <ul class="table-view">
+            <li class="table-view-cell" ng-repeat="match in matchs">
+                <a class="push-right" href="#watch/{{match.mid}}">
+                    <strong>{{$index+1}}. {{match.mth.tnm}} vs  {{match.mta.tnm}}</strong>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
