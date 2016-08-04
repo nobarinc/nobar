@@ -37,7 +37,8 @@ and open the template in the editor.
 
 .table-view-live .team-home,
 .table-view-live .team-away,
-.table-view-live .team-vs{
+.table-view-live .team-vs,
+.table-view-live .col{
     display: inline-block;
     vertical-align: top;
     float: none;
@@ -118,6 +119,7 @@ and open the template in the editor.
     top: 0;
     bottom: 0;
     margin: auto;
+    box-shadow: 0 0 15px #000;
 }
 
 

@@ -26,6 +26,13 @@ App.config(
             controller: 'highlightCtrl'
         })
         
+        //comming soon page
+        .when('/comsoon', {
+            title: 'Segera Tayang',
+            templateUrl: 'partials/comsoon.html',
+            controller: 'comsoonCtrl'
+        })
+        
         //watch page
         .when('/watch/:id', {
             title: 'Watch',
@@ -107,8 +114,35 @@ App.controller('liveCtrl', function($scope, $http, apiMatch) {
     $http
         .get(apiMatch)
         .then(function(response) {
-            $scope.matchs = response.data;
+            $scope.matchs = [];
+            for(var i=0; i<response.data.length; i++){
+                var d = Math.abs(new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                if (d>=-6000000 && d<=0){
+                    $scope.matchs[i] = response.data[i];
+                    $scope.matchs[i]['msd'] = new Date(response.data[i]['msd']);
+                }
+            }
         });
+    
+});
+
+//-- COMING SOON
+
+App.controller('comsoonCtrl', function($scope, $http, apiMatch) {
+    $http
+        .get(apiMatch)
+        .then(function(response) {
+            $scope.matchs = [];
+            for(var i=0; i<response.data.length; i++){
+                var d = Math.abs(new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                 if (d<=6000000 && d>=0){
+                    $scope.matchs[i] = response.data[i];
+                    $scope.matchs[i]['msd'] = new Date(response.data[i]['msd']);
+                    $scope.matchs[i]['d']
+                }
+            }
+        });
+    
 });
 
 //-- HIGHLIGHT
