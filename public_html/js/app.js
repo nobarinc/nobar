@@ -40,17 +40,15 @@ App.config(
         // use the HTML5 History API
         //$locationProvider.html5Mode(true);
         
-        //API root
-        $provide.value("apiRoot", "http://localhost/nobar/models/get-api.php?l=");
-        
         //API match
-        $provide.value("apiMatch", "http://localhost/nobar/models/get-api.php?l=aHR0cDovL2xvY2FsaG9zdC9ub2Jhci9tb2RlbHMvYWpheC1nZXQucGhwP2E9bWF0Y2gmYj1s&callback=JSON_CALLBACK");
+        $provide.value("apiMatch", "json/match.json");
         
-        
+        //images team base
+        $provide.value("imageTeamBase", "images/team/");
     }
 );
 
-App.run(['$location', '$rootScope', function($location, $rootScope) {
+App.run(['$location', '$rootScope', 'imageTeamBase', function($location, $rootScope, imageTeamBase) {
         
     $rootScope
     
@@ -58,11 +56,10 @@ App.run(['$location', '$rootScope', function($location, $rootScope) {
 
             if (current.hasOwnProperty('$$route')) {
                 $rootScope.title = current.$$route.title;
-                $rootScope.imageBase = "http://localhost/nobar/assets/photos/";
+                $rootScope.imageTeamBase = imageTeamBase;
             }
 
-        })
-        
+        });
         
     
 }]);
@@ -97,7 +94,7 @@ App.directive('includeReplace', function () {
 App.controller('homeCtrl', function($scope, $http, apiMatch) {
     
     $http
-        .jsonp(apiMatch)
+        .get(apiMatch)
         .then(function(response) {
             $scope.matchs = response.data;
         });
@@ -108,7 +105,7 @@ App.controller('homeCtrl', function($scope, $http, apiMatch) {
 
 App.controller('liveCtrl', function($scope, $http, apiMatch) {
     $http
-        .jsonp(apiMatch)
+        .get(apiMatch)
         .then(function(response) {
             $scope.matchs = response.data;
         });
@@ -118,7 +115,7 @@ App.controller('liveCtrl', function($scope, $http, apiMatch) {
 
 App.controller('highlightCtrl', function($scope, $http, apiMatch) {
     $http
-        .jsonp(apiMatch)
+        .get(apiMatch)
         .then(function(response) {
             $scope.matchs = response.data;
         });
@@ -129,7 +126,7 @@ App.controller('highlightCtrl', function($scope, $http, apiMatch) {
 App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
     
     $http
-        .jsonp(apiMatch)
+        .get(apiMatch)
         .then(function(response) { 
             for(var i=0; i<response.data.length; i++){
                 if (response.data[i]["mid"] == $routeParams.id){
