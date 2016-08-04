@@ -116,10 +116,11 @@ App.controller('liveCtrl', function($scope, $http, apiMatch) {
         .then(function(response) {
             $scope.matchs = [];
             for(var i=0; i<response.data.length; i++){
-                var d = Math.abs(new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
-                if (d>=-6000000 && d<=0){
-                    $scope.matchs[i] = response.data[i];
-                    $scope.matchs[i]['msd'] = new Date(response.data[i]['msd']);
+                var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                console.log(d);
+                if (d<=6000000 && d>=0){
+                    response.data[i]['msd'] = new Date(response.data[i]['msd']);
+                    $scope.matchs.push(response.data[i]);
                 }
             }
         });
@@ -134,11 +135,11 @@ App.controller('comsoonCtrl', function($scope, $http, apiMatch) {
         .then(function(response) {
             $scope.matchs = [];
             for(var i=0; i<response.data.length; i++){
-                var d = Math.abs(new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
-                 if (d<=6000000 && d>=0){
-                    $scope.matchs[i] = response.data[i];
-                    $scope.matchs[i]['msd'] = new Date(response.data[i]['msd']);
-                    $scope.matchs[i]['d']
+                var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                console.log(d);
+                if (d<0){
+                    response.data[i]['msd'] = new Date(response.data[i]['msd']);
+                    $scope.matchs.push(response.data[i]);
                 }
             }
         });
@@ -151,7 +152,15 @@ App.controller('highlightCtrl', function($scope, $http, apiMatch) {
     $http
         .get(apiMatch)
         .then(function(response) {
-            $scope.matchs = response.data;
+            $scope.matchs = [];
+            for(var i=0; i<response.data.length; i++){
+                var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                console.log(d);
+                if (d>6000000){
+                    response.data[i]['msd'] = new Date(response.data[i]['msd']);
+                    $scope.matchs.push(response.data[i]);
+                }
+            }
         });
 });
 
