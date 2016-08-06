@@ -108,6 +108,11 @@ and open the template in the editor.
     text-align: center;
 }
 
+.table-view-match .table-view-cell-spinner {
+    text-align: center;
+    padding: 40px 0;
+}
+
 /* WATCH */
 
 .bar-watch {
@@ -155,10 +160,6 @@ and open the template in the editor.
 }
 
 /* LOADER SPINNER */
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
 
 @keyframes rotate360 {
     from { transform: rotate(0deg); }

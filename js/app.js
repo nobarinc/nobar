@@ -168,7 +168,7 @@ App.controller('highlightCtrl', function($scope, $http, apiMatch) {
             }
         })
         .finally(function () {
-            $scope.loaded = false;
+            $scope.loaded = true;
         });
 });
 
