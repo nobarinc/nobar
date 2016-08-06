@@ -1,10 +1,15 @@
 <header class="bar bar-nav bar-watch">
-    <a href back-button class="pull-left">
+    <a href="{{watchback}}" class="pull-left">
         <span class="icon icon-left-nav"></span>
     </a>
-    <h1 class="title title-watch">{{match.mth.tnm}} VS {{match.mta.tnm}}</h1>
+    <h1 class="title title-watch">{{match.mth.tnm}} <strong>v</strong> {{match.mta.tnm}}</h1>
     <div class="segmented-control segmented-control-watch pull-right">
+        <!--
         <a id="server" class="control-item cursor-pointer " ng-repeat="url in urls" ng-click="loadServer(url.urlk, url.urwd, url.urhg)" >
+            Server {{$index+1}}
+        </a>
+        -->
+        <a href="#watch/{{match.mid}}/{{$index+1}}" class="control-item cursor-pointer " ng-repeat="url in urls" ng-class="{active: server == $index+1}">
             Server {{$index+1}}
         </a>
     </div>

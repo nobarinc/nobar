@@ -16,25 +16,28 @@ App.config(
         .when('/live', {
             title: 'Live',
             templateUrl: 'partials/live.html',
-            controller: 'liveCtrl'
+            controller: 'liveCtrl',
+            activetab: 'live'
         })
         
         //highlight page
         .when('/highlight', {
             title: 'Highlight',
             templateUrl: 'partials/highlight.html',
-            controller: 'highlightCtrl'
+            controller: 'highlightCtrl',
+            activetab: 'highlight'
         })
         
         //comming soon page
         .when('/comsoon', {
-            title: 'Segera Tayang',
+            title: 'Comming Soon',
             templateUrl: 'partials/comsoon.html',
-            controller: 'comsoonCtrl'
+            controller: 'comsoonCtrl',
+            activetab: 'comsoon'
         })
         
         //watch page
-        .when('/watch/:id', {
+        .when('/watch/:id/:server', {
             title: 'Watch',
             templateUrl: 'partials/watch.html',
             controller: 'watchCtrl'
@@ -63,6 +66,7 @@ App.run(['$location', '$rootScope', 'imageTeamBase', function($location, $rootSc
 
             if (current.hasOwnProperty('$$route')) {
                 $rootScope.title = current.$$route.title;
+                $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
             }
 
@@ -175,10 +179,11 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
                 if (response.data[i]["mid"] == $routeParams.id){
                     $scope.match = response.data[i];
                     $scope.urls = response.data[i]["url"];
+                    $scope.goBackWatch(response.data[i]['msd']);
                 }
             }
             angular.element(document.querySelector('#playerarea')).ready(function () {
-                $scope.loadServer($scope.match.url[0].urlk, $scope.match.url[0].urwd, $scope.match.url[0].urhg);
+                $scope.loadServer($scope.match.url[($routeParams.server-1)].urlk, $scope.match.url[($routeParams.server-1)].urwd, $scope.match.url[($routeParams.server-1)].urhg);
             });
         });
         
@@ -187,6 +192,21 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
             .attr('src',url)
             .css('width',width+'px')
             .css('height',height+'px');
+    };
+    
+    $scope.server = $routeParams.server;
+    
+    $scope.goBackWatch = function(msd){
+        var d = (new Date() - new Date(msd.replace(/-/g,'/')));
+        if (d>6000000){
+            $scope.watchback = '#highlight'; 
+        } else if (d<=6000000 && d>=0){
+            $scope.watchback = '#live'; 
+        } else if (d<0) {
+            $scope.watchback = '#comsoon'; 
+        } else {
+            $scope.watchback = '#/'; 
+        }
     };
     
 });

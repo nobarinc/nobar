@@ -27,18 +27,41 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-/* HOME */
+/* HEADER */
 
-.segmented-control-home {
+.segmented-control-header-1 {
     max-width: 40%;
 }
 
-/* LIVE */
+/* HOME */
 
-.table-view-live .team-home,
-.table-view-live .team-away,
-.table-view-live .team-vs,
-.table-view-live .col{
+.card-home {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.card-home-head {
+    padding-top: 60px;
+    text-align: center;
+    color: #555;
+}
+
+.card-home-head .logo-img {
+    margin-top: 40px;
+}
+
+.card-home-body {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* MATCH LIST */
+
+.table-view-match .team-home,
+.table-view-match .team-away,
+.table-view-match .team-vs,
+.table-view-match .col{
     display: inline-block;
     vertical-align: top;
     float: none;
@@ -48,7 +71,7 @@ and open the template in the editor.
     line-height: 50px;
 }
 
-.table-view-live .team-vs {
+.table-view-match .team-vs {
     width: 5%;
     text-align: center;
 }
@@ -64,7 +87,7 @@ and open the template in the editor.
     overflow: hidden;
 }
 
-.table-view-live .team-home .img-team {
+.table-view-match .team-home .img-team {
     float: right;
 }
 
@@ -77,6 +100,12 @@ and open the template in the editor.
     margin: auto;
     max-height: 100%;
     max-width: 100%;
+}
+
+.card-no-match {
+    padding: 40px;
+    color: #bbb;
+    text-align: center;
 }
 
 /* WATCH */
@@ -98,8 +127,11 @@ and open the template in the editor.
 }
 
 .title-watch {
-    color: #428bca;
-    text-shadow: 0 0 10px #09c;
+    color: #000;
+    /*text-shadow: 0 0 10px #09c;*/
+}
+.title-watch strong {
+    color: #000;
 }
 
 .card-watch {
@@ -141,15 +173,15 @@ and open the template in the editor.
     
     /* LIVE MOBILE */
     
-    .table-view-live .team-home,
-    .table-view-live .team-away,
-    .table-view-live .team-vs {
+    .table-view-match .team-home,
+    .table-view-match .team-away,
+    .table-view-match .team-vs {
         width: auto;
         line-height: 40px;
     }
     
-    .table-view-live .team-home .team-home-name,
-    .table-view-live .team-away .team-away-name {
+    .table-view-match .team-home .team-home-name,
+    .table-view-match .team-away .team-away-name {
         display: none;
     }
     
