@@ -1,31 +1,34 @@
 <div class="card" ng-show="matchs.length!=0">
     <ul class="table-view table-view-match">
-        <li class="table-view-cell" ng-repeat="match in matchs">
-            <a class="push-right" href="#watch/{{match.mid}}/1">
+        <div class="spinner" ng-hide="loaded"></div>
+        <div ng-cloak="" ng-show="loaded" >
+            <li class="table-view-cell" ng-repeat="match in matchs">
+                <a class="push-right" href="#watch/{{match.mid}}/1">
 
-                <div class="team-home">
-                    <span class="team-home-name">{{match.mth.tnm}}</span>
-                    <div class="img-team">
-                        <img ng-src="{{$root.imageTeamBase}}{{match.mth.tlg}}" />
+                    <div class="team-home">
+                        <span class="team-home-name">{{match.mth.tnm}}</span>
+                        <div class="img-team">
+                            <img ng-src="{{$root.imageTeamBase}}{{match.mth.tlg}}" />
+                        </div>
                     </div>
-                </div>
-                <div class="team-vs">
-                    <strong>vs</strong>
-                </div>
-                <div class="team-away">
-                    <div class="img-team">
-                        <img ng-src="{{$root.imageTeamBase}}{{match.mta.tlg}}" />
+                    <div class="team-vs">
+                        <strong>vs</strong>
                     </div>
-                    <span class="team-away-name">{{match.mta.tnm}}</span>
-                </div>
-                <div class="col">
-                    <span>{{match.msd | date:'medium'}}</span>
-                    &middot;
-                    <span>{{match.d}}</span>
-                </div>
+                    <div class="team-away">
+                        <div class="img-team">
+                            <img ng-src="{{$root.imageTeamBase}}{{match.mta.tlg}}" />
+                        </div>
+                        <span class="team-away-name">{{match.mta.tnm}}</span>
+                    </div>
+                    <div class="col">
+                        <span>{{match.msd | date:'medium'}}</span>
+                        &middot;
+                        <span>{{match.d}}</span>
+                    </div>
 
-            </a>
-        </li>
+                </a>
+            </li>
+        </div>
     </ul>
 </div>
 <div class="card card-no-match" ng-show="matchs.length<=0">No data.</div>

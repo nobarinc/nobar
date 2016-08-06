@@ -30,7 +30,7 @@ App.config(
         
         //comming soon page
         .when('/comsoon', {
-            title: 'Comming Soon',
+            title: 'Coming Soon',
             templateUrl: 'partials/comsoon.html',
             controller: 'comsoonCtrl',
             activetab: 'comsoon'
@@ -54,7 +54,7 @@ App.config(
         $provide.value("apiMatch", "http://www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
         
         //images team base
-        $provide.value("imageTeamBase", "images/team/");
+        $provide.value("imageTeamBase", "http://www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
     }
 );
 
@@ -153,6 +153,7 @@ App.controller('comsoonCtrl', function($scope, $http, apiMatch) {
 //-- HIGHLIGHT
 
 App.controller('highlightCtrl', function($scope, $http, apiMatch) {
+    $scope.loaded = false;
     $http
         .get(apiMatch)
         .then(function(response) {
@@ -165,6 +166,9 @@ App.controller('highlightCtrl', function($scope, $http, apiMatch) {
                     $scope.matchs.push(response.data[i]);
                 }
             }
+        })
+        .finally(function () {
+            $scope.loaded = false;
         });
 });
 
