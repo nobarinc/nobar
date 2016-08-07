@@ -130,7 +130,7 @@ App.factory("dataMatch", function ($http, apiMatch) {
                     scope.loaded = false;
                     
                     if ( n>=0 ) {
-                        for(var i=n; i<(n+1) && i<response.data.length; i++){
+                        for(var i=n; i<(n+15) && i<response.data.length; i++){
                             
                             var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
                             
