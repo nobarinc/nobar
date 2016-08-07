@@ -71,6 +71,14 @@ and open the template in the editor.
     line-height: 50px;
 }
 
+.table-view-match .team-home {
+    text-align: right;
+}
+
+.table-view-match .team-away {
+    text-align: left;
+}
+
 .table-view-match .team-vs {
     width: 5%;
     text-align: center;
@@ -89,6 +97,11 @@ and open the template in the editor.
 
 .table-view-match .team-home .img-team {
     float: right;
+    margin-left: 15px;
+}
+
+.table-view-match .team-away .img-team {
+    margin-right: 15px;
 }
 
 .img-team img {

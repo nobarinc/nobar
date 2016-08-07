@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute', 'ngAnimate']);
+var App = angular.module('App', ['ngRoute' , 'ngAnimate' , 'infinite-scroll']);
 
 App.config(
     function($routeProvider, $locationProvider, $provide) {
@@ -100,76 +100,114 @@ App.directive('includeReplace', function () {
     };
 });
 
+App.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});
+
+//-- MATCHS
+
+App.factory("dataMatch", function ($http, apiMatch) {
+    
+    var dataMatch = function(scope,type){
+        scope.loaded = false;
+        $http
+            .get(apiMatch)
+            .then(function(response) {
+                
+                scope.matchs = [];
+                scope.np = 0;
+                
+                scope.loadMatchs = function(n){
+                    
+                    scope.loaded = false;
+                    
+                    if ( n>=0 ) {
+                        for(var i=n; i<(n+1) && i<response.data.length; i++){
+                            
+                            var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                            
+                            if ( d<=6000000 && d>=0 && type=='live' ) {
+                                
+                                response.data[i]['msd'] = new Date(response.data[i]['msd']);
+                                scope.matchs.push(response.data[i]);
+                                
+                            } else if ( d<0 && type=='comsoon' ) {
+                                
+                                response.data[i]['msd'] = new Date(response.data[i]['msd']);
+                                scope.matchs.push(response.data[i]);
+                                
+                            } else if ( d>6000000 && type=='highlight' ) {
+                                
+                                response.data[i]['msd'] = new Date(response.data[i]['msd']);
+                                scope.matchs.push(response.data[i]);
+                                
+                            }
+                            
+                        }
+
+                        if (n<response.data.length)
+                            scope.np = this.matchs.length;
+                        else
+                            scope.np = -1;
+                        
+                    } else {
+                        console.log("ALL DATA LOADED");
+                    }
+                    
+                    scope.loaded = true;
+                    
+                };
+                
+                if (scope.np==0)
+                    scope.loadMatchs(0);
+
+            })
+            .finally(function () {
+                scope.loaded = true;
+            }); 
+    };
+    
+    return (dataMatch);
+    
+});
+
 //-- HOME
 
 App.controller('homeCtrl', function($scope, $http, apiMatch) {
     
-    $http
-        .get(apiMatch)
-        .then(function(response) {
-            $scope.matchs = response.data;
-        });
     
 });
 
 //-- LIVE
 
-App.controller('liveCtrl', function($scope, $http, apiMatch) {
-    $http
-        .get(apiMatch)
-        .then(function(response) {
-            $scope.matchs = [];
-            for(var i=0; i<response.data.length; i++){
-                var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
-                console.log(d);
-                if (d<=6000000 && d>=0){
-                    response.data[i]['msd'] = new Date(response.data[i]['msd']);
-                    $scope.matchs.push(response.data[i]);
-                }
-            }
-        });
+App.controller('liveCtrl', function($scope, $http, dataMatch) { //d<=6000000 && d>=0
+    
+    new dataMatch($scope,'live');
     
 });
 
 //-- COMING SOON
 
-App.controller('comsoonCtrl', function($scope, $http, apiMatch) {
-    $http
-        .get(apiMatch)
-        .then(function(response) {
-            $scope.matchs = [];
-            for(var i=0; i<response.data.length; i++){
-                var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
-                console.log(d);
-                if (d<0){
-                    response.data[i]['msd'] = new Date(response.data[i]['msd']);
-                    $scope.matchs.push(response.data[i]);
-                }
-            }
-        });
+App.controller('comsoonCtrl', function($scope, $http, dataMatch) { //d<0
+    
+    new dataMatch($scope,'comsoon');
     
 });
 
 //-- HIGHLIGHT
 
-App.controller('highlightCtrl', function($scope, $http, apiMatch) {
-    $scope.loaded = false;
-    $http
-        .get(apiMatch)
-        .then(function(response) {
-            $scope.matchs = [];
-            for(var i=0; i<response.data.length; i++){
-                var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
-                console.log(d);
-                if (d>6000000){
-                    response.data[i]['msd'] = new Date(response.data[i]['msd']);
-                    $scope.matchs.push(response.data[i]);
-                }
-            }
-        })
-        .finally(function () {
-            $scope.loaded = true;
-        });
+App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
+    
+     new dataMatch($scope,'highlight');
+    
 });
 
 //-- WATCH
