@@ -236,7 +236,7 @@ and open the template in the editor.
     /* HEADER MOBILE */
     
     .segmented-control-header-1 {
-        max-width: none;
+        max-width: 80%;
     }
     
     /* LIVE MOBILE */
