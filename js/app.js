@@ -51,7 +51,7 @@ App.config(
         //$locationProvider.html5Mode(true);
         
         //API match
-        $provide.value("apiMatch", "http://www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
+        $provide.value("apiMatch", "json/match.json");
         
         //images team base
         $provide.value("imageTeamBase", "http://www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
