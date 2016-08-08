@@ -6,9 +6,11 @@
                     <div class="icon-live" ng-show="iconlive == true">
                         <span class="icon ion-android-wifi animation-heart-beat"></span>
                     </div>
-                    <b>{{match.mco.name}}</b>
-                    <br>
-                    <span>{{match.msd | date:'medium'}}</span>
+                    <span>
+                        <b>{{match.mco.name}}</b>
+                        <br>
+                        {{match.msd | date:'medium'}}
+                    </span>
                 </div>
                 <div class="col-team">
                     <div class="team-home">
