@@ -1,7 +1,7 @@
 var App = angular.module('App', ['ngRoute' , 'ngAnimate']);
 
 App.config(
-    function($routeProvider, $locationProvider, $provide) {
+    function($routeProvider, $locationProvider, $provide, $httpProvider) {
         
         $routeProvider
         
@@ -50,11 +50,24 @@ App.config(
         // use the HTML5 History API
         //$locationProvider.html5Mode(true);
         
+        //initialize get if not there
+        if (!$httpProvider.defaults.headers.get) {
+            $httpProvider.defaults.headers.get = {};    
+        }    
+
+        //disable IE ajax request caching
+        $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+        // extra
+        $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+        $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+        
         //API match
         $provide.value("apiMatch", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
         
         //images team base
         $provide.value("imageTeamBase", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
+    
+    
     }
 );
 
@@ -116,9 +129,10 @@ App.directive('whenScrolled', function() {
 App.factory("dataMatch", function ($http, apiMatch) {
     
     var dataMatch = function(scope,type){
+        
         scope.loaded = false;
         $http
-            .get(apiMatch)
+            .get(apiMatch,{ headers: { 'Cache-Control' : 'no-cache' } , cache : false })
             .success(function(response) {
                 
                 scope.matchs = [];
@@ -175,7 +189,14 @@ App.factory("dataMatch", function ($http, apiMatch) {
             })
             .finally(function () {
                 scope.loaded = true;
-            }); 
+            });
+        scope.type = type;
+        scope.refresh = function(){
+            scope.error = false;
+            scope.matchs = 0;
+            new dataMatch(scope,type);
+        };
+        
     };
     
     return (dataMatch);
