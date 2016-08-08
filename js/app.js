@@ -51,10 +51,10 @@ App.config(
         //$locationProvider.html5Mode(true);
         
         //API match
-        $provide.value("apiMatch", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374-www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
+        $provide.value("apiMatch", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
         
         //images team base
-        $provide.value("imageTeamBase", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374-www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
+        $provide.value("imageTeamBase", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
     }
 );
 
@@ -119,7 +119,7 @@ App.factory("dataMatch", function ($http, apiMatch) {
         scope.loaded = false;
         $http
             .get(apiMatch)
-            .then(function(response) {
+            .success(function(response) {
                 
                 scope.matchs = [];
                 scope.np = 0;
@@ -129,30 +129,30 @@ App.factory("dataMatch", function ($http, apiMatch) {
                     scope.loaded = false;
                     
                     if ( n>=0 ) {
-                        for(var i=n; i<(n+15) && i<response.data.length; i++){
+                        for(var i=n; i<(n+15) && i<response.length; i++){
                             
-                            var d = (new Date() - new Date(response.data[i]['msd'].replace(/-/g,'/')));
+                            var d = (new Date() - new Date(response[i]['msd'].replace(/-/g,'/')));
                             
                             if ( d<=6000000 && d>=0 && type=='live' ) {
                                 
-                                response.data[i]['msd'] = new Date(response.data[i]['msd']);
-                                scope.matchs.push(response.data[i]);
+                                response[i]['msd'] = new Date(response[i]['msd']);
+                                scope.matchs.push(response[i]);
                                 
                             } else if ( d<0 && type=='comsoon' ) {
                                 
-                                response.data[i]['msd'] = new Date(response.data[i]['msd']);
-                                scope.matchs.push(response.data[i]);
+                                response[i]['msd'] = new Date(response[i]['msd']);
+                                scope.matchs.push(response[i]);
                                 
                             } else if ( d>6000000 && type=='highlight' ) {
                                 
-                                response.data[i]['msd'] = new Date(response.data[i]['msd']);
-                                scope.matchs.push(response.data[i]);
+                                response[i]['msd'] = new Date(response[i]['msd']);
+                                scope.matchs.push(response[i]);
                                 
                             }
                             
                         }
 
-                        if (n<response.data.length)
+                        if (n<response.length)
                             scope.np = this.matchs.length;
                         else
                             scope.np = -1;
@@ -168,6 +168,10 @@ App.factory("dataMatch", function ($http, apiMatch) {
                 if (scope.np==0)
                     scope.loadMatchs(0);
 
+            })
+            .error(function(data, status){
+                scope.error = data || "Request failed ";
+                scope.errorstatus = status;
             })
             .finally(function () {
                 scope.loaded = true;
