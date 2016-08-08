@@ -54,7 +54,7 @@ App.config(
         $provide.value("apiMatch", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374-www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
         
         //images team base
-        $provide.value("imageTeamBase", "http://www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
+        $provide.value("imageTeamBase", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374-www.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
     }
 );
 

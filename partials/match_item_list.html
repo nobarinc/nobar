@@ -2,7 +2,7 @@
     <ul class="table-view table-view-match">
         <li class="table-view-cell" ng-repeat="match in matchs" >
             <a class="push-right" href="#watch/{{match.mid}}/1">
-                <div class="col">
+                <div class="col-detail">
                     <div class="icon-live" ng-show="iconlive == true">
                         <span class="icon ion-android-wifi animation-heart-beat"></span>
                     </div>
@@ -10,20 +10,22 @@
                     <br>
                     <span>{{match.msd | date:'medium'}}</span>
                 </div>
-                <div class="team-home">
-                    <span class="team-home-name">{{match.mth.tnm}}</span>
-                    <div class="img-team">
-                        <img ng-src="{{$root.imageTeamBase}}{{match.mth.tlg}}" />
+                <div class="col-team">
+                    <div class="team-home">
+                        <span class="team-home-name">{{match.mth.tnm}}</span>
+                        <div class="img-team">
+                            <img ng-src="{{$root.imageTeamBase}}{{match.mth.tlg}}" />
+                        </div>
                     </div>
-                </div>
-                <div class="team-vs">
-                    <strong>{{match.mgh}} v {{match.mga}}</strong>
-                </div>
-                <div class="team-away">
-                    <div class="img-team">
-                        <img ng-src="{{$root.imageTeamBase}}{{match.mta.tlg}}" />
+                    <div class="team-vs">
+                        <strong>{{match.mgh}} v {{match.mga}}</strong>
                     </div>
-                    <span class="team-away-name">{{match.mta.tnm}}</span>
+                    <div class="team-away">
+                        <div class="img-team">
+                            <img ng-src="{{$root.imageTeamBase}}{{match.mta.tlg}}" />
+                        </div>
+                        <span class="team-away-name">{{match.mta.tnm}}</span>
+                    </div>
                 </div>
             </a>
         </li>

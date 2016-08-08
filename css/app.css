@@ -58,41 +58,54 @@ and open the template in the editor.
 
 /* MATCH LIST */
 
-.table-view-match .team-home,
-.table-view-match .team-away,
-.table-view-match .team-vs,
-.table-view-match .col{
+.table-view-match .table-view-cell {
+    font-size: 0;
+}
+
+.table-view-match .col-team,
+.table-view-match .col-team .team-home,
+.table-view-match .col-team .team-away,
+.table-view-match .col-team .team-vs,
+.table-view-match .col-detail {
     display: inline-block;
     vertical-align: top;
     float: none;
     font-size: 13px;
-    width: 25%;
     text-align: center;
     line-height: 50px;
 }
 
-.table-view-match .team-home {
-    text-align: right;
-}
-
-.table-view-match .team-away {
+.table-view-match .col-team {
+    width: 75%;
     text-align: left;
+    font-size: 0;
 }
 
-.table-view-match .team-vs {
-    width: 5%;
+.table-view-match .col-team .team-home {
+    text-align: right;
+    width: 40%;
+}
+
+.table-view-match .col-team .team-away {
+    text-align: left;
+    width: 40%;
+}
+
+.table-view-match .col-team .team-vs {
     text-align: center;
+    width: 19%;
 }
 
-.table-view-match .col {
+.table-view-match .col-detail {
     line-height: 25px;
     background-color: #3da13d;
     color: #fff;
     border: 1px solid green;
     border-radius: 3px;
+    width: 25%;
 }
 
-.table-view-match .col .icon-live {
+.table-view-match .col-detail .icon-live {
     padding-top: 10px;
     color: yellow;
 }
@@ -137,6 +150,10 @@ and open the template in the editor.
 .table-view-match .table-view-cell-spinner {
     text-align: center;
     padding: 40px 0;
+}
+
+.table-view-match .navigate-right::after, .push-right::after {
+    font-size: 20px;
 }
 
 /* WATCH */
@@ -239,18 +256,30 @@ and open the template in the editor.
         max-width: 80%;
     }
     
-    /* LIVE MOBILE */
+    /* MATCH LIST MOBILE */
     
-    .table-view-match .team-home,
-    .table-view-match .team-away,
-    .table-view-match .team-vs {
-        width: auto;
+    .table-view-match .col-team {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        border: 1px solid #3da13d;
+        border-top: none;
+        border-radius: 0 0 3px 3px;
         line-height: 40px;
     }
     
-    .table-view-match .team-home .team-home-name,
-    .table-view-match .team-away .team-away-name {
+    .table-view-match .col-team .team-home .team-home-name,
+    .table-view-match .col-team .team-away  .team-away-name {
         display: none;
+    }
+    
+    .table-view-match .col-team .team-vs {
+        line-height: 40px;
+    }
+    
+    .table-view-match .col-detail {
+        width: 100%;
+        border-radius: 3px 3px 0 0;
     }
     
     .img-team {
