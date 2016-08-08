@@ -191,7 +191,7 @@ App.controller('liveCtrl', function($scope, $http, dataMatch) { //d<=6000000 && 
     
     new dataMatch($scope,'live');
     
-    $scope.live == true;
+    $scope.iconlive = true;
     
 });
 
@@ -207,9 +207,7 @@ App.controller('comsoonCtrl', function($scope, $http, dataMatch) { //d<0
 
 App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
     
-     new dataMatch($scope,'highlight');
-     
-     $scope.live == true;
+    new dataMatch($scope,'highlight');
     
 });
 
