@@ -2,9 +2,14 @@
     <a href="#/" class="pull-left">
         <span class="icon icon-home"></span>
     </a>
+    <a class="pull-right">
+        <span class="icon ion-android-wifi"></span>
+    </a>
     <div class="segmented-control segmented-control-header-1">
-        <a href="#live" class="control-item" ng-class="{active: $root.activetab == 'live'}">Live</a>
+        <a href="#live" class="control-item" ng-class="{active: $root.activetab == 'live'}">
+            <strong><span class="ion-android-wifi"></span></strong> Live
+        </a>
         <a href="#highlight" class="control-item" ng-class="{active: $root.activetab == 'highlight'}">Highlight</a>
         <a href="#comsoon" class="control-item" ng-class="{active: $root.activetab == 'comsoon'}">Coming Soon</a>
     </div>
-</header> 
+</header>

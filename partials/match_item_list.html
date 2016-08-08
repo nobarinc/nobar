@@ -2,6 +2,9 @@
     <ul class="table-view table-view-match">
         <li class="table-view-cell" ng-repeat="match in matchs" >
             <a class="push-right" href="#watch/{{match.mid}}/1">
+                <div class="col">
+                    <span class="ion-android-wifi"></span>
+                </div>
                 <div class="team-home">
                     <span class="team-home-name">{{match.mth.tnm}}</span>
                     <div class="img-team">
@@ -9,7 +12,7 @@
                     </div>
                 </div>
                 <div class="team-vs">
-                    <strong>vs</strong>
+                    <strong>{{match.mgh}} v {{match.mga}}</strong>
                 </div>
                 <div class="team-away">
                     <div class="img-team">

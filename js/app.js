@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute' , 'ngAnimate' , 'infinite-scroll']);
+var App = angular.module('App', ['ngRoute' , 'ngAnimate']);
 
 App.config(
     function($routeProvider, $locationProvider, $provide) {
@@ -7,7 +7,7 @@ App.config(
         
         //home page
         .when('/', {
-            title: 'Home',
+            title: 'Nobar',
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl'
         })
@@ -78,7 +78,6 @@ App.run(['$location', '$rootScope', 'imageTeamBase', function($location, $rootSc
 App.directive('backButton', function(){
     return {
         restrict: 'A',
-
         link: function(scope, element, attrs) {
             element.bind('click', goBack);
 
@@ -87,13 +86,13 @@ App.directive('backButton', function(){
                 scope.$apply();
             }
         }
-    }
+    };
 });
 
 App.directive('includeReplace', function () {
     return {
         require: 'ngInclude',
-        restrict: 'A', /* optional */
+        restrict: 'A',
         link: function (scope, el, attrs) {
             el.replaceWith(el.children());
         }
@@ -192,6 +191,8 @@ App.controller('liveCtrl', function($scope, $http, dataMatch) { //d<=6000000 && 
     
     new dataMatch($scope,'live');
     
+    $scope.live == true;
+    
 });
 
 //-- COMING SOON
@@ -207,6 +208,8 @@ App.controller('comsoonCtrl', function($scope, $http, dataMatch) { //d<0
 App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
     
      new dataMatch($scope,'highlight');
+     
+     $scope.live == true;
     
 });
 
