@@ -233,6 +233,12 @@ and open the template in the editor.
         border: none;
     }
     
+    /* HEADER MOBILE */
+    
+    .segmented-control-header-1 {
+        max-width: none;
+    }
+    
     /* LIVE MOBILE */
     
     .table-view-match .team-home,
