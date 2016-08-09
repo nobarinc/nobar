@@ -130,71 +130,80 @@ App.factory("dataMatch", function ($http, apiMatch) {
     
     var dataMatch = function(scope,type){
         
-        scope.loaded = false;
-        $http
-            .get(apiMatch,{ headers: { 'Cache-Control' : 'no-cache' } , cache : false })
-            .success(function(response) {
-                
-                scope.matchs = [];
-                scope.np = 0;
-                
-                scope.loadMatchs = function(n){
-                    
-                    scope.loaded = false;
-                    
-                    if ( n>=0 ) {
-                        for(var i=n; i<(n+15) && i<response.length; i++){
-                            
-                            var d = (new Date() - new Date(response[i]['msd'].replace(/-/g,'/')));
-                            
-                            if ( d<=6000000 && d>=0 && type=='live' ) {
-                                
-                                response[i]['msd'] = new Date(response[i]['msd']);
-                                scope.matchs.push(response[i]);
-                                
-                            } else if ( d<0 && type=='comsoon' ) {
-                                
-                                response[i]['msd'] = new Date(response[i]['msd']);
-                                scope.matchs.push(response[i]);
-                                
-                            } else if ( d>6000000 && type=='highlight' ) {
-                                
-                                response[i]['msd'] = new Date(response[i]['msd']);
-                                scope.matchs.push(response[i]);
-                                
+        scope.loadloop = 0;
+        
+        scope.load = function(){
+            scope.loaded = false;
+            scope.error = false;
+            $http
+                .get(apiMatch,{ headers: { 'Cache-Control' : 'no-cache' } , cache : false })
+                .success(function(response) {
+
+                    scope.matchs = [];
+                    scope.np = 0;
+
+                    scope.loadMatchs = function(n){
+
+                        scope.loaded = false;
+
+                        if ( n>=0 ) {
+                            for(var i=n; i<(n+15) && i<response.length; i++){
+
+                                var d = (new Date() - new Date(response[i]['msd'].replace(/-/g,'/')));
+
+                                if ( d<=6000000 && d>=0 && type=='live' ) {
+
+                                    response[i]['msd'] = new Date(response[i]['msd']);
+                                    scope.matchs.push(response[i]);
+
+                                } else if ( d<0 && type=='comsoon' ) {
+
+                                    response[i]['msd'] = new Date(response[i]['msd']);
+                                    scope.matchs.push(response[i]);
+
+                                } else if ( d>6000000 && type=='highlight' ) {
+
+                                    response[i]['msd'] = new Date(response[i]['msd']);
+                                    scope.matchs.push(response[i]);
+
+                                }
+
                             }
-                            
+
+                            if (n<response.length)
+                                scope.np = this.matchs.length;
+                            else
+                                scope.np = -1;
+
+                        } else {
+                            console.log("ALL DATA LOADED");
                         }
 
-                        if (n<response.length)
-                            scope.np = this.matchs.length;
-                        else
-                            scope.np = -1;
-                        
-                    } else {
-                        console.log("ALL DATA LOADED");
-                    }
-                    
-                    scope.loaded = true;
-                    
-                };
-                
-                if (scope.np==0)
-                    scope.loadMatchs(0);
+                        scope.loaded = true;
 
-            })
-            .error(function(data, status){
-                scope.error = data || "Request failed ";
-                scope.errorstatus = status;
-            })
-            .finally(function () {
-                scope.loaded = true;
-            });
+                    };
+
+                    if (scope.np==0)
+                        scope.loadMatchs(0);
+
+                })
+                .error(function(data, status){
+                    scope.loadloop++;
+                    if (scope.loadloop<=5) {
+                        scope.reload();
+                    } else {
+                        scope.error = data || "Request failed ";
+                        scope.errorstatus = status;
+                    }
+                })
+                .finally(function () {
+                    
+                });
+        };
+        scope.load();
         scope.type = type;
-        scope.refresh = function(){
-            scope.error = false;
-            scope.matchs = 0;
-            new dataMatch(scope,type);
+        scope.reload = function(){
+            scope.load();
         };
         
     };
@@ -240,20 +249,41 @@ App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
 
 App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
     
-    $http
-        .get(apiMatch)
-        .then(function(response) { 
-            for(var i=0; i<response.data.length; i++){
-                if (response.data[i]["mid"] == $routeParams.id){
-                    $scope.match = response.data[i];
-                    $scope.urls = response.data[i]["url"];
-                    $scope.goBackWatch(response.data[i]['msd']);
+    $scope.loadloop = 0;
+    
+    $scope.load = function(){
+        $scope.loaded = false;
+        $scope.error = false;
+        
+        $http
+            .get(apiMatch)
+            .success(function(response) { 
+                for(var i=0; i<response.length; i++){
+                    if (response[i]["mid"] == $routeParams.id){
+                        $scope.match = response[i];
+                        $scope.urls = response[i]["url"];
+                        $scope.goBackWatch(response[i]['msd']);
+                    }
                 }
-            }
-            angular.element(document.querySelector('#playerarea')).ready(function () {
-                $scope.loadServer($scope.match.url[($routeParams.server-1)].urlk, $scope.match.url[($routeParams.server-1)].urwd, $scope.match.url[($routeParams.server-1)].urhg);
+                angular.element(document.querySelector('#playerarea')).ready(function () {
+                    $scope.loadServer($scope.match.url[($routeParams.server-1)].urlk, $scope.match.url[($routeParams.server-1)].urwd, $scope.match.url[($routeParams.server-1)].urhg);
+                });
+            })
+            .error(function(data,status){
+                $scope.loadloop++;
+                if ($scope.loadloop<=5) {
+                    $scope.load();
+                } else {
+                    $scope.error = data || "Request failed ";
+                    $scope.errorstatus = status;
+                }
+            })
+            .finally(function(){
+                $scope.loaded = true;
             });
-        });
+    };
+    
+    $scope.load();
         
     $scope.loadServer = function(url,width,height){
         angular.element(document.querySelector('#playerarea'))

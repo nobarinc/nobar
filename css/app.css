@@ -163,13 +163,6 @@ and open the template in the editor.
     right: 0;
 }
 
-.content-watch {
-    left: 0;
-    right: 0;
-    background-color: #111;
-    border-color: #000;
-}
-
 .segmented-control-watch {
     max-width: 20%;
 }
@@ -186,7 +179,20 @@ and open the template in the editor.
     border-radius: 0;
 }
 
-.iframe-watch {
+.content-watch {
+    left: 0;
+    right: 0;
+    background-color: #111;
+    border-color: #000;
+}
+
+.content-watch .content-watch-body {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.frame-watch {
     border: none;
     background: #222;
     width: 400px;
@@ -200,6 +206,23 @@ and open the template in the editor.
     bottom: 0;
     margin: auto;
     box-shadow: 0 0 15px #000;
+}
+
+.content-watch-body .spinner,
+.content-watch-body .alert-watch {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    margin: auto;
+}
+
+.content-watch-body .alert-watch {
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
 }
 
 /* LOADER SPINNER */
@@ -258,6 +281,15 @@ and open the template in the editor.
     
     /* MATCH LIST MOBILE */
     
+    .table-view-match .table-view-cell {
+        padding: 10px;
+    }
+    
+    .table-view-match .table-view-cell > a:not(.btn) {
+        padding: 0;
+        margin: 0;
+    }
+    
     .table-view-match .col-team {
         width: 100%;
         text-align: center;
@@ -285,6 +317,10 @@ and open the template in the editor.
     .img-team {
         width: 40px;
         height: 40px;
+    }
+    
+    .table-view-match .navigate-right::after, .push-right::after {
+        display: none;
     }
     
 }

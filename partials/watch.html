@@ -15,7 +15,16 @@
     </div>
 </header>
 <div class="content content-watch">
-    <embed id="playerarea" class="iframe-watch"></embed>
+    <div class="content-watch-body">
+        <embed id="playerarea" class="frame-watch"/>
+        <span class="spinner" ng-hide="loaded"></span>
+        <div class="alert-watch" ng-show="loaded && error">
+            {{error}} <br>
+            <a class="btn btn-primary" ng-click="load()">
+                <span class="icon icon-refresh"></span>
+            </a>
+        </div>
+    </div>
 </div>
 
 
