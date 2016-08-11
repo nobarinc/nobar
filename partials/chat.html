@@ -1,0 +1,40 @@
+<div class="chatbox" ng-controller="chatCtrl" >
+    <div class="chatbox-auth" ng-hide="myteam">
+        <div>
+            <span class="h3">Who are you ?</span>
+        </div>
+        <div class="tm-auth">
+            <div class="tm-img cursor-pointer" ng-click="myteam = match.mth.tid">
+                <img ng-src="{{$root.imageTeamBase}}{{match.mth.tlg}}" />
+            </div>
+            <div class="tm-vs">
+                or
+            </div>
+            <div class="tm-img cursor-pointer" ng-click="myteam = match.mta.tid">
+                <img ng-src="{{$root.imageTeamBase}}{{match.mta.tlg}}" />
+            </div>
+        </div>
+        <p>Click a team to chat & have fun.</p>
+        <span class="small">&COPY; 2016 Nobar.</span>
+    </div>
+    <div id="chatbox-body" class="chatbox-body" scroll-bottom="messages">
+        <div ng-repeat="message in messages" class="box-message" >
+            <div class="team-logo">
+                <img ng-src="{{$root.imageTeamBase + myteamLoad(message.myteam, match.mth, match.mta)}}" />
+            </div>
+            <div class="message-detail">
+                {{message.content}}
+            </div>
+            
+        </div>
+    </div>
+    <div class="chatbox-footer">
+        <form ng-submit="sendMessage()" class="form-send">
+            <input ng-model="messageContent" class="textbox"/>
+            <button class="btn btn-primary">
+                <span class="icon ion-android-upload"></span>
+            </button>
+        </form>
+    </div>
+</div>
+

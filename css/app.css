@@ -164,7 +164,7 @@ and open the template in the editor.
 }
 
 .segmented-control-watch {
-    max-width: 20%;
+    max-width: 29%;
 }
 
 .title-watch {
@@ -184,12 +184,15 @@ and open the template in the editor.
     right: 0;
     background-color: #111;
     border-color: #000;
+    font-size: 0;
 }
 
 .content-watch .content-watch-body {
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 70%;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .frame-watch {
@@ -223,7 +226,149 @@ and open the template in the editor.
     height: 50px;
     line-height: 50px;
     text-align: center;
+    font-size: 17px;
 }
+
+.content-watch .content-watch-sidebar {
+    width: 30%;
+    display: inline-block;
+    vertical-align: bottom;
+    background: #fff;
+    height: 100%;
+}
+
+/* CHAT */
+
+.chatbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.chatbox .chatbox-body {
+    position: relative;
+    width: 100%;
+    height: 90%;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+    padding-top: 20px;
+    overflow: auto;
+    background: #fff;
+}
+
+.chatbox .chatbox-body .box-message {  
+    word-wrap: break-word;
+    font-size: 0;
+    overflow: auto;
+}
+
+.chatbox .chatbox-body .box-message:nth-child(odd) {
+   background-color: #fcfcfc;
+}
+
+.chatbox .chatbox-body .box-message .team-logo {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    max-width: 20%;
+}
+
+.chatbox .chatbox-body .box-message .team-logo img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.chatbox .chatbox-body .box-message .message-detail {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow: hidden;
+    width: 80%;
+    padding: 9px 0;
+}
+
+.chatbox .chatbox-footer {
+    position: relative;
+    width: 100%;
+    height: 10%;
+}
+
+.chatbox .chatbox-footer .form-send {
+    height: 100%;
+    width: 100%;
+}
+
+.chatbox .chatbox-footer .form-send .textbox {
+    width: 85%;
+    height: 100%;
+    background: #eee;
+    border: none;
+    margin: 0;
+    float: left;
+    border-radius: 0;
+}
+
+.chatbox .chatbox-footer .form-send button {
+    width: 15%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.chatbox .chatbox-auth {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #fff;
+    z-index: 1;
+    padding-top: 20%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.chatbox-auth .tm-auth {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.chatbox-auth .tm-auth .tm-img,
+.chatbox-auth .tm-auth .tm-vs {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    line-height: 60px;
+    vertical-align: top;
+}
+
+.chatbox-auth .tm-auth .tm-img:hover {
+    opacity: 0.8;
+}
+
+.chatbox-auth .tm-auth .tm-img img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+}
+
 
 /* LOADER SPINNER */
 

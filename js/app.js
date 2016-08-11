@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute' , 'ngAnimate']);
+var App = angular.module('App', ['ngRoute' , 'ngAnimate' , 'pubnub.angular.service']);
 
 App.config(
     function($routeProvider, $locationProvider, $provide, $httpProvider) {
@@ -51,16 +51,14 @@ App.config(
         //$locationProvider.html5Mode(true);
         
         //initialize get if not there
+        /*
         if (!$httpProvider.defaults.headers.get) {
             $httpProvider.defaults.headers.get = {};    
         }    
-
-        //disable IE ajax request caching
         $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-        // extra
         $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
         $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
-        
+        */
         //API match
         $provide.value("apiMatch", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
         
@@ -309,4 +307,100 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
     
 });
 
+//-- PUBNUB CHAT
+
+App.directive('scrollBottom', function () {
+  return {
+    scope: {
+      scrollBottom: "="
+    },
+    link: function (scope, element) {
+        scope.$watchCollection('scrollBottom', function() {
+            var e = angular.element(element);
+            var scrollHeight = e.prop('scrollHeight');
+            e.prop('scrollTop',scrollHeight);
+        });
+    }
+  };
+});
+
+App.controller('chatCtrl', ['$scope', 'Pubnub', '$routeParams', function($scope, Pubnub, $routeParams) {
+    $scope.messages = [];
+    $scope.channel = $routeParams.id;
+    $scope.messageContent = '';
+    $scope.myteam = false;
+    
+    $scope.uuid = function() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
+        function(c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    };
+    $scope.uuid = $scope.uuid();
+ 
+    Pubnub.init({
+        publish_key: 'pub-c-7f934b4e-8557-4d19-8820-44592024e34e',
+        subscribe_key: 'sub-c-ecf35586-5f38-11e6-bf96-0619f8945a4f',
+        ssl: true,
+        uuid: $scope.uuid
+    });
+
+    $scope.sendMessage = function() { 
+        if (!$scope.messageContent || $scope.messageContent === '') {
+            return;
+        }
+        Pubnub.publish({
+            channel: $scope.channel,
+            message: {
+                content: $scope.messageContent,
+                sender_uuid: $scope.uuid,
+                date: new Date(),
+                myteam : $scope.myteam
+            },
+            callback: function(m) {
+                console.log(m);
+            }
+        });
+        $scope.messageContent = '';
+
+    };
+
+    // Subscribe to messages channel
+    Pubnub.subscribe({
+        channel: $scope.channel,
+        triggerEvents: ['callback']
+    });
+    
+    $scope.$on(Pubnub.getMessageEventNameFor($scope.channel), function(ngEvent, m) {
+        $scope.$apply(function() {
+            $scope.messages.push(m);
+        });
+    });
+    
+    // Populate message history using jsapi (optional)
+    Pubnub.history({
+        channel: $scope.channel,
+        count: 500,
+        callback: function(payload) {
+            payload[0].forEach(function(message) {
+                $scope.messages.push(message);
+            });
+            $scope.$apply();
+        }
+    });
+    
+    
+    $scope.myteamLoad = function(id,th,ta){
+        var r;
+        if (id == th.tid)
+            r = th.tlg;
+        else
+            r = ta.tlg;
+        
+        return r;
+    };
+
+
+}]);
 
