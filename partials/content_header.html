@@ -1,0 +1,11 @@
+<header class="content-header">
+    <div class="col">
+        <span>{{$root.title}}</span>
+    </div>
+    <div class="col col-search">
+        <input type="text" class="search" placeholder="search" ng-model="$root.queryMatchs" ng-keyup="loadMatchs(np)" />
+    </div>
+    <div class="col">
+        <span class="clock pull-right">{{$root.clock | date: 'medium'}}</span>
+    </div>
+</header>

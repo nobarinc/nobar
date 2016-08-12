@@ -21,6 +21,21 @@ and open the template in the editor.
     font-size: 24px;
 }
 
+.bar input{
+    height: 29px;
+    margin: 7px 0;
+}
+
+.bar-nav ~ .content {
+    padding-top: 0;
+    margin-top: 44px;
+}
+
+.bar-header-secondary ~ .content {
+    padding-top: 0;
+    margin-top: 88px;
+}
+
 .content {
     right: 15%;
     left: 15%;
@@ -52,6 +67,47 @@ and open the template in the editor.
 
 .segmented-control-header-1 {
     max-width: 40%;
+}
+
+/* CONTENT HEADER */
+
+.content-header {
+    position: relative;
+    background: #f5f5f5;
+    border-bottom: none;
+    font-size: 0;
+    padding: 15px;
+    line-height: 28px;
+}
+
+.content-header .col {
+    width: 33.33%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.content-header .col-search {
+    padding: 0 5%;
+}
+
+.content-header .col-search .search {
+    background: #f8f8f8;
+    margin: 0;
+    height: 28px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.content-header .clock {
+    font-size: 9px;
+}
+
+/* CONTENT */
+
+.bar-nav-secondary ~ .content {
+    margin-top: 88px;
 }
 
 /* HOME */

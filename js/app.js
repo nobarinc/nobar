@@ -30,7 +30,7 @@ App.config(
         
         //comming soon page
         .when('/comsoon', {
-            title: 'Coming Soon',
+            title: 'Upcoming',
             templateUrl: 'partials/comsoon.html',
             controller: 'comsoonCtrl',
             activetab: 'comsoon'
@@ -69,7 +69,7 @@ App.config(
     }
 );
 
-App.run(['$location', '$rootScope', 'imageTeamBase', function($location, $rootScope, imageTeamBase) {
+App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', function($location, $rootScope, imageTeamBase, clock) {
         
     $rootScope
     
@@ -79,9 +79,12 @@ App.run(['$location', '$rootScope', 'imageTeamBase', function($location, $rootSc
                 $rootScope.title = current.$$route.title;
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
+                $rootScope.queryMatchs = '';
             }
 
         });
+    
+    new clock($rootScope);
         
 }]);
 
@@ -121,9 +124,32 @@ App.directive('whenScrolled', function() {
     };
 });
 
+//-- CLOCK
+
+App.factory("clock", function($timeout){
+    
+    function clock(scope) {
+        scope.clock = "loading clock..."; // initialise the time variable
+        scope.tickInterval = 1000; //ms
+
+        var tick = function() {
+            scope.clock = Date.now(); // get the current time
+            $timeout(tick, scope.tickInterval); // reset the timer
+        };
+
+        // Start the timer
+        $timeout(tick, scope.tickInterval);
+        
+        
+    }
+    
+    return (clock);
+    
+});
+
 //-- MATCHS
 
-App.factory("dataMatch", function ($http, apiMatch) {
+App.factory("dataMatch", function ($http, apiMatch, $filter) {
     
     var dataMatch = function(scope,type){
         
@@ -163,10 +189,10 @@ App.factory("dataMatch", function ($http, apiMatch) {
 
                     scope.loadMatchs = function(n){
                         scope.loaded = false;
-
+                        
                         if ( n>=0 ) {
-                            for(var i=n; i<(n+10) && i<scope.matchsTemporary.length; i++){
-
+                            for(var i=n; i<(n+15) && i<scope.matchsTemporary.length; i++){
+                                
                                 scope.matchsTemporary[i]['msd'] = new Date(scope.matchsTemporary[i]['msd']);
                                 scope.matchs.push(scope.matchsTemporary[i]);
 
