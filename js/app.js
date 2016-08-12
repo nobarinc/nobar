@@ -149,7 +149,7 @@ App.factory("clock", function($timeout){
 
 //-- MATCHS
 
-App.factory("dataMatch", function ($http, apiMatch, $filter) {
+App.factory("dataMatch", function ($http, apiMatch, $rootScope) {
     
     var dataMatch = function(scope,type){
         
@@ -233,6 +233,19 @@ App.factory("dataMatch", function ($http, apiMatch, $filter) {
         scope.reload = function(){
             scope.load();
         };
+        
+        scope.loadSearch = function(){
+            
+            if (!$rootScope.queryMatchs){
+                scope.matchs = [];
+                scope.loadMatchs(0);
+                console.log($rootScope.queryMatchs + 'QUERY MATCHS');
+            } else {
+                scope.matchs = '';
+                scope.np = -1;
+                scope.matchs = scope.matchsTemporary;
+            }
+        } 
         
     };
     

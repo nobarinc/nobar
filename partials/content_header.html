@@ -1,9 +1,10 @@
 <header class="content-header">
     <div class="col col-title">
         <span>{{$root.title}}</span>
+        <span ng-if="!$root.queryMatchs">( {{matchs.length}} of {{matchsTemporary.length}} )</span>
     </div>
     <div class="col col-search">
-        <input type="text" class="search" placeholder="search" ng-model="$root.queryMatchs" ng-keyup="loadMatchs(np)" />
+        <input type="text" class="search" placeholder="search" ng-model="$root.queryMatchs" ng-keyup="loadSearch()" />
     </div>
     <div class="col col-clock">
         <span class="clock pull-right">{{$root.clock | date: 'medium'}}</span>
