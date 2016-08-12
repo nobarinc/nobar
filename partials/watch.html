@@ -14,6 +14,9 @@
 </header>
 <div class="content content-watch">
     <div class="content-watch-body" ng-class="{fit : watchSidebar==false}">
+        <div class="coming-soon-layer" ng-if="layer">
+            <span>Streaming is available 10 minutes before match.</span>
+        </div>
         <embed id="playerarea" class="frame-watch"/>
         <span class="spinner" ng-hide="loaded"></span>
         <div class="alert-watch" ng-show="loaded && error">

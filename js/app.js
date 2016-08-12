@@ -135,43 +135,48 @@ App.factory("dataMatch", function ($http, apiMatch) {
             $http
                 .get(apiMatch,{ headers: { 'Cache-Control' : 'no-cache' } , cache : false })
                 .success(function(response) {
-
-                    scope.matchs = [];
+                    
                     scope.np = 0;
+                    scope.matchsTemporary = [];
+                    scope.matchs = [];
+                    
+                    for (var i=0; i<response.length; i++) {
+                        var d = (new Date() - new Date(response[i]['msd'].toString().replace(/-/g,'/')));
+                        
+                        if ( d<=6000000 && d>=0 && type=='live' ) {
+
+                            response[i]['msd'] = new Date(response[i]['msd']);
+                            scope.matchsTemporary.push(response[i]);
+
+                        } else if ( d<0 && type=='comsoon' ) {
+
+                            response[i]['msd'] = new Date(response[i]['msd']);
+                            scope.matchsTemporary.push(response[i]);
+
+                        } else if ( d>6000000 && type=='highlight' ) {
+
+                            response[i]['msd'] = new Date(response[i]['msd']);
+                            scope.matchsTemporary.push(response[i]);
+
+                        }
+                    }
 
                     scope.loadMatchs = function(n){
-
                         scope.loaded = false;
 
                         if ( n>=0 ) {
-                            for(var i=n; i<(n+15) && i<response.length; i++){
+                            for(var i=n; i<(n+10) && i<scope.matchsTemporary.length; i++){
 
-                                var d = (new Date() - new Date(response[i]['msd'].replace(/-/g,'/')));
-
-                                if ( d<=6000000 && d>=0 && type=='live' ) {
-
-                                    response[i]['msd'] = new Date(response[i]['msd']);
-                                    scope.matchs.push(response[i]);
-
-                                } else if ( d<0 && type=='comsoon' ) {
-
-                                    response[i]['msd'] = new Date(response[i]['msd']);
-                                    scope.matchs.push(response[i]);
-
-                                } else if ( d>6000000 && type=='highlight' ) {
-
-                                    response[i]['msd'] = new Date(response[i]['msd']);
-                                    scope.matchs.push(response[i]);
-
-                                }
+                                scope.matchsTemporary[i]['msd'] = new Date(scope.matchsTemporary[i]['msd']);
+                                scope.matchs.push(scope.matchsTemporary[i]);
 
                             }
 
-                            if (n<response.length)
-                                scope.np = this.matchs.length;
+                            if (n<scope.matchsTemporary.length)
+                                scope.np = scope.matchs.length;
                             else
                                 scope.np = -1;
-
+                                
                         } else {
                             console.log("ALL DATA LOADED");
                         }
@@ -299,6 +304,7 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
             $scope.watchback = '#live'; 
         } else if (d<0) {
             $scope.watchback = '#comsoon'; 
+            $scope.layer = true;
         } else {
             $scope.watchback = '#/'; 
         }

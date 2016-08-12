@@ -261,6 +261,21 @@ and open the template in the editor.
     height: 100%;
 }
 
+.coming-soon-layer {
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 60px;
+    line-height: 60px;
+    z-index: 1;
+    text-align: center;
+    margin: auto;
+}
+
 /* CHAT */
 
 .chatbox {

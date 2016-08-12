@@ -1,6 +1,6 @@
 <div class="card" ng-hide="matchs.length<=0 || error">
     <ul class="table-view table-view-match">
-        <li class="table-view-cell" ng-repeat="match in matchs" >
+        <li class="table-view-cell" ng-repeat="match in matchs track by $index" >
             <a class="push-right" href="#watch/{{match.mid}}/1">
                 <div class="col-detail">
                     <div class="icon-live" ng-show="iconlive == true">
