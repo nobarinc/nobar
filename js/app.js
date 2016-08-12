@@ -306,15 +306,13 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
     
     var screenWidth = $window.innerWidth;
     if (screenWidth < 1030)
-        $scope.watchSidebar = false
+        $scope.watchSidebar = false;
     else
         $scope.watchSidebar = true;
     
     $scope.watchSidebarShow = function(){
         $scope.watchSidebar == true ? $scope.watchSidebar = false : $scope.watchSidebar = true;
     };
-    
-    
     
 });
 
