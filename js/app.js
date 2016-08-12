@@ -167,21 +167,21 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope) {
                     scope.matchs = [];
                     
                     for (var i=0; i<response.length; i++) {
-                        var d = (new Date() - new Date(response[i]['msd'].toLocaleString().toString().replace(/-/g,'/')));
+                        var d = ( new Date() - new Date(response[i]['msd'].toString().replace(/-/g,'/')) );
                         
                         if ( d<=6000000 && d>=0 && type=='live' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd'].toLocaleString());
+                            response[i]['msd'] = new Date(response[i]['msd']);
                             scope.matchsTemporary.push(response[i]);
 
                         } else if ( d<0 && type=='comsoon' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd'].toLocaleString());
+                            response[i]['msd'] = new Date(response[i]['msd']);
                             scope.matchsTemporary.push(response[i]);
 
                         } else if ( d>6000000 && type=='highlight' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd'].toLocaleString());
+                            response[i]['msd'] = new Date(response[i]['msd']);
                             scope.matchsTemporary.push(response[i]);
 
                         }
