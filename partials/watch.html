@@ -3,19 +3,17 @@
         <span class="icon icon-left-nav"></span>
     </a>
     <h1 class="title title-watch">{{match.mth.tnm}} <strong>v</strong> {{match.mta.tnm}}</h1>
+    <a class="toggle pull-right cursor-pointer" ng-click="watchSidebarShow()" ng-class="{active : watchSidebar}">
+        <div class="toggle-handle"></div>
+    </a>
     <div class="segmented-control segmented-control-watch pull-right">
-        <!--
-        <a id="server" class="control-item cursor-pointer " ng-repeat="url in urls" ng-click="loadServer(url.urlk, url.urwd, url.urhg)" >
-            Server {{$index+1}}
-        </a>
-        -->
         <a href="#watch/{{match.mid}}/{{$index+1}}" class="control-item cursor-pointer " ng-repeat="url in urls" ng-class="{active: server == $index+1}">
             Server {{$index+1}}
         </a>
     </div>
 </header>
 <div class="content content-watch">
-    <div class="content-watch-body">
+    <div class="content-watch-body" ng-class="{fit : watchSidebar==false}">
         <embed id="playerarea" class="frame-watch"/>
         <span class="spinner" ng-hide="loaded"></span>
         <div class="alert-watch" ng-show="loaded && error">
@@ -25,7 +23,7 @@
             </a>
         </div>
     </div>
-    <div class="content-watch-sidebar">
+    <div class="content-watch-sidebar" ng-show="watchSidebar">
         <ng-include src="'partials/chat.html'"></ng-include>
     </div>
 </div>

@@ -83,7 +83,6 @@ App.run(['$location', '$rootScope', 'imageTeamBase', function($location, $rootSc
 
         });
         
-    
 }]);
 
 App.directive('backButton', function(){
@@ -245,7 +244,7 @@ App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
 
 //-- WATCH
 
-App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
+App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $window) {
     
     $scope.loadloop = 0;
     
@@ -304,6 +303,18 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch) {
             $scope.watchback = '#/'; 
         }
     };
+    
+    var screenWidth = $window.innerWidth;
+    if (screenWidth < 1030)
+        $scope.watchSidebar = false
+    else
+        $scope.watchSidebar = true;
+    
+    $scope.watchSidebarShow = function(){
+        $scope.watchSidebar == true ? $scope.watchSidebar = false : $scope.watchSidebar = true;
+    };
+    
+    
     
 });
 
@@ -393,6 +404,7 @@ App.controller('chatCtrl', ['$scope', 'Pubnub', '$routeParams', function($scope,
     
     $scope.myteamLoad = function(id,th,ta){
         var r;
+        if (!th || !ta) return;
         if (id == th.tid)
             r = th.tlg;
         else

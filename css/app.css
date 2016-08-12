@@ -14,6 +14,13 @@ and open the template in the editor.
     border-top: none;
 }
 
+.bar .toggle {
+    position: relative;
+    z-index: 20;
+    margin: 5px;
+    font-size: 24px;
+}
+
 .content {
     right: 15%;
     left: 15%;
@@ -21,6 +28,20 @@ and open the template in the editor.
     border-top: none;
     border-bottom: none;
     background-color: #f5f5f5;
+}
+
+.segmented-control .control-item.active {
+    background-color: #f5f5f5;
+    color: #3473aa;
+}
+
+.toggle.active {
+    background-color: #428bca;
+    border: 2px solid #428bca;
+}
+
+.toggle.active .toggle-handle {
+    border-color: #428bca;
 }
 
 .cursor-pointer {
@@ -164,7 +185,7 @@ and open the template in the editor.
 }
 
 .segmented-control-watch {
-    max-width: 29%;
+    max-width: 20%;
 }
 
 .title-watch {
@@ -194,6 +215,9 @@ and open the template in the editor.
     display: inline-block;
     vertical-align: top;
 }
+.content-watch .content-watch-body.fit {
+    width: 100%;
+}
 
 .frame-watch {
     border: none;
@@ -203,10 +227,10 @@ and open the template in the editor.
     box-shadow: none;
     -webkit-box-shadow: none;
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    left: -1030px;
+    right: -1030px;
+    top: -1030px;
+    bottom: -1030px;
     margin: auto;
     box-shadow: 0 0 15px #000;
 }
@@ -466,6 +490,31 @@ and open the template in the editor.
     
     .table-view-match .navigate-right::after, .push-right::after {
         display: none;
+    }
+    
+    /* WATCH */
+    
+    .title-watch {
+        display: none;
+    }
+    
+    .segmented-control-watch {
+        width: 50%;
+    }
+    
+    .frame-watch {
+        transform: scale(0.3);
+    }
+    
+    .content-watch .content-watch-sidebar {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin: auto;
+        width: 100%;
+        height: 100%;
     }
     
 }
