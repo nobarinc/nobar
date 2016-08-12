@@ -176,12 +176,12 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope) {
 
                         } else if ( d<0 && type=='comsoon' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd']);
+                            response[i]['msd'] = new Date(response[i]['msd'].toLocaleString());
                             scope.matchsTemporary.push(response[i]);
 
                         } else if ( d>6000000 && type=='highlight' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd']);
+                            response[i]['msd'] = new Date(response[i]['msd'].toLocaleString());
                             scope.matchsTemporary.push(response[i]);
 
                         }
