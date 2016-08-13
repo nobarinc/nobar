@@ -277,7 +277,7 @@ and open the template in the editor.
 
 .frame-watch {
     border: none;
-    background: #222;
+    background: #000;
     width: 400px;
     height: 300px;
     box-shadow: none;
@@ -289,6 +289,7 @@ and open the template in the editor.
     bottom: -1030px;
     margin: auto;
     box-shadow: 0 0 15px #000;
+    overflow: hidden;
 }
 
 .content-watch-body .spinner,
