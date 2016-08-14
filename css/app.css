@@ -586,7 +586,7 @@ and open the template in the editor.
     }
     
     .segmented-control-watch {
-        width: 50%;
+        max-width: 50%;
     }
     
     .frame-watch {

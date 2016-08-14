@@ -1,4 +1,4 @@
-var App = angular.module('App', ['ngRoute' , 'ngAnimate' , 'pubnub.angular.service']);
+var App = angular.module('App', ['ngRoute' , 'ngAnimate' , 'pubnub.angular.service', 'angularMoment']);
 
 App.config(
     function($routeProvider, $locationProvider, $provide, $httpProvider) {
@@ -149,7 +149,7 @@ App.factory("clock", function($timeout){
 
 //-- MATCHS
 
-App.factory("dataMatch", function ($http, apiMatch, $rootScope) {
+App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment) {
     
     var dataMatch = function(scope,type){
         
@@ -167,22 +167,35 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope) {
                     scope.matchs = [];
                     
                     for (var i=0; i<response.length; i++) {
-                        var d = ( new Date() - new Date(response[i]['msd'].toString().replace(/-/g,'/')) );
+                        //var d = ( new Date() - new Date(response[i]['msd'].toString().replace(/-/g,'/')) );
+                        var fmt  = 'YYYY-MM-DD HH:mm:ss';
+                        var msdWib = moment.tz(response[i]['msd'], "Asia/Jakarta");
+                        var msdL = msdWib.clone().local();
+                        var now  = moment(new moment(),fmt);
+                        var then = moment(msdL,fmt);
+                        var d    = moment.duration(now.diff(then)).asMinutes();
                         
-                        if ( d<=7000000 && d>=0 && type=='live' ) {
+                        //console.log(' > '+ now.format(fmt) +' - '+ then.format(fmt) +' = '+d+' > '+response[i]['mth']['tnm']+' v '+ response[i]['mta']['tnm']);
+                        
+                        console.log(msdWib.format(fmt) + ' -- '+ msdL.format(fmt));
+                        
+                        response[i]['msd'] = new moment(msdL);
+                        response[i]['msdRT'] = new moment(msdL).fromNow();
+                        
+                        if ( d<=120 && d>=0 && type=='live' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd']);
                             scope.matchsTemporary.push(response[i]);
+                            scope.matchorderby = 'msd';
 
                         } else if ( d<0 && type=='comsoon' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd']);
                             scope.matchsTemporary.push(response[i]);
+                            scope.matchorderby = 'msd';
 
-                        } else if ( d>7000000 && type=='highlight' ) {
+                        } else if ( d>120 && type=='highlight' ) {
 
-                            response[i]['msd'] = new Date(response[i]['msd']);
                             scope.matchsTemporary.push(response[i]);
+                            scope.matchorderby = '-msd';
 
                         }
                     }
