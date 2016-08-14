@@ -177,7 +177,7 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment) {
                         
                         //console.log(' > '+ now.format(fmt) +' - '+ then.format(fmt) +' = '+d+' > '+response[i]['mth']['tnm']+' v '+ response[i]['mta']['tnm']);
                         
-                        console.log(msdWib.format(fmt) + ' -- '+ msdL.format(fmt));
+                        //console.log(msdWib.format(fmt) + ' -- '+ msdL.format(fmt));
                         
                         response[i]['msd'] = new moment(msdL);
                         response[i]['msdRT'] = new moment(msdL).fromNow();
