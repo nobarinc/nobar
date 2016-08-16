@@ -2,8 +2,8 @@
     <a href="#/" class="pull-left">
         <span class="icon icon-home"></span>
     </a>
-    <a class="pull-right">
-        <span class="icon ion-android-wifi"></span>
+    <a class="pull-right cursor-pointer" ng-click="$root.modalMenu=true">
+        <span class="icon ion-android-menu"></span>
     </a>
     <div class="segmented-control segmented-control-header-1">
         <a href="#live" class="control-item" ng-class="{active: $root.activetab == 'live'}">
@@ -13,3 +13,5 @@
         <a href="#comsoon" class="control-item" ng-class="{active: $root.activetab == 'comsoon'}">Upcoming</a>
     </div>
 </header>
+
+<ng-include src="'partials/menu.html'"></ng-include>

@@ -43,6 +43,27 @@ App.config(
             controller: 'watchCtrl'
         })
         
+        //privacy page
+        .when('/privacy', {
+            title: 'Privacy',
+            templateUrl: 'partials/privacy.html',
+            activetab : 'privacy'
+        })
+        
+        //policy & safety page
+        .when('/policyandsafety', {
+            title: 'Policy and Safety',
+            templateUrl: 'partials/policyandsafety.html',
+            activetab : 'policyandsafety'
+        })
+        
+        //contact us page
+        .when('/contactus', {
+            title: 'Contact us',
+            templateUrl: 'partials/contactus.html',
+            activetab : 'contactus'
+        })
+        
         .otherwise({
           redirectTo: '/'
         });
@@ -80,6 +101,7 @@ App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', function($location
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
                 $rootScope.queryMatchs = '';
+                $rootScope.modalMenu = false;
             }
 
         });

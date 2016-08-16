@@ -17,7 +17,7 @@
         <div class="coming-soon-layer" ng-if="layer">
             <span>Streaming is available 10 minutes before match.</span>
         </div>
-        <embed id="playerarea" class="frame-watch"/>
+        <iframe id="playerarea" class="frame-watch" scrolling=no frameborder=0 scrolling=no allowtransparency=true  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <span class="spinner" ng-hide="loaded"></span>
         <div class="alert-watch" ng-show="loaded && error">
             {{error}} <br>

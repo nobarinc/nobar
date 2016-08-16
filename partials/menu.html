@@ -1,0 +1,31 @@
+<div class="modal modal-menu" ng-class="{active : $root.modalMenu}">
+    <header class="bar bar-nav">
+      <a class="icon icon-close pull-right cursor-pointer" ng-click="$root.modalMenu=false"></a>
+      <h1 class="title">Menu</h1>
+    </header>
+
+    <div class="content">
+        <div class="content-header-menu">
+            <img src="images/ap/icon.png" />
+            Hi, what do you need ?
+        </div>
+        <ul class="table-view table-view-menu">
+            <li class="table-view-cell" ng-class="{active: $root.activetab == 'privacy'}">
+                <a href="#privacy" class="navigate-right">
+                    Privacy
+                </a>
+            </li>
+            <li class="table-view-cell" ng-class="{active: $root.activetab == 'policyandsafety'}">
+                <a href="#policyandsafety" class="navigate-right">
+                    Policy & safety
+                </a>
+            </li>
+            <li class="table-view-cell" ng-class="{active: $root.activetab == 'contactus'}">
+                <a href="#contactus" class="navigate-right">
+                    Contact us
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>
