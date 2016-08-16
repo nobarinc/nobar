@@ -586,6 +586,13 @@ and open the template in the editor.
         max-width: 80%;
     }
     
+    /* HEADER MENU */
+    
+    .modal-menu {
+        right: 0;
+        width: 100%;
+    }
+    
     /* CONTENT HEADER */
     
     .content-header .col-title {
