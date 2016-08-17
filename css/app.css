@@ -173,6 +173,13 @@ and open the template in the editor.
     margin-top: 50px;
 }
 
+.card-home-footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 12px;
+    color: #bbb;
+}
+
 /* MATCH LIST */
 
 .table-view-match .table-view-cell {
