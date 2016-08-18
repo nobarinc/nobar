@@ -8,6 +8,7 @@ App.config(
         //home page
         .when('/', {
             title: 'Nobar',
+            description: 'Awesome live & highlight football streaming app',
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl'
         })
@@ -15,6 +16,7 @@ App.config(
         //live page
         .when('/live', {
             title: 'Live',
+            description: 'Watch live streaming football',
             templateUrl: 'partials/live.html',
             controller: 'liveCtrl',
             activetab: 'live'
@@ -23,6 +25,7 @@ App.config(
         //highlight page
         .when('/highlight', {
             title: 'Highlight',
+            description: 'Watch the latest football highlights',
             templateUrl: 'partials/highlight.html',
             controller: 'highlightCtrl',
             activetab: 'highlight'
@@ -31,6 +34,7 @@ App.config(
         //comming soon page
         .when('/comsoon', {
             title: 'Upcoming',
+            description: 'Upcoming matchs football',
             templateUrl: 'partials/comsoon.html',
             controller: 'comsoonCtrl',
             activetab: 'comsoon'
@@ -38,7 +42,8 @@ App.config(
         
         //watch page
         .when('/watch/:id/:server', {
-            title: 'Watch',
+           // title: '', // on controller
+           // description: '', // on controller
             templateUrl: 'partials/watch.html',
             controller: 'watchCtrl'
         })
@@ -46,6 +51,7 @@ App.config(
         //privacy page
         .when('/privacy', {
             title: 'Privacy',
+            description: 'Privacy',
             templateUrl: 'partials/privacy.html',
             activetab : 'privacy'
         })
@@ -53,6 +59,7 @@ App.config(
         //policy & safety page
         .when('/policyandsafety', {
             title: 'Policy and Safety',
+            description: 'Policy and Safety',
             templateUrl: 'partials/policyandsafety.html',
             activetab : 'policyandsafety'
         })
@@ -60,6 +67,7 @@ App.config(
         //contact us page
         .when('/contactus', {
             title: 'Contact us',
+            description: 'We welcome problem reports, feature ideas and general comments',
             templateUrl: 'partials/contactus.html',
             activetab : 'contactus'
         })
@@ -98,6 +106,7 @@ App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', function($location
 
             if (current.hasOwnProperty('$$route')) {
                 $rootScope.title = current.$$route.title;
+                $rootScope.description = current.$$route.description;
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
                 $rootScope.queryMatchs = '';
@@ -324,7 +333,7 @@ App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
 
 //-- WATCH
 
-App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $window) {
+App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $window, $rootScope) {
     
     $scope.loadloop = 0;
     
@@ -340,6 +349,8 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
                         $scope.match = response[i];
                         $scope.urls = response[i]["url"];
                         $scope.goBackWatch(response[i]['msd']);
+                        $rootScope.title = 'Watch '+ response[i]['mta']['tnm'] +' v '+ response[i]['mth']['tnm']+' '+ response[i]['msd'];
+                        $rootScope.description = 'Watch '+ response[i]['mta']['tnm'] +' v '+ response[i]['mth']['tnm']+' '+ response[i]['msd'];
                     }
                 }
                 angular.element(document.querySelector('#playerarea')).ready(function () {
