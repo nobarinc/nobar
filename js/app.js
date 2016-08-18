@@ -171,7 +171,7 @@ App.factory("clock", function($timeout){
 
 //-- MATCHS
 
-App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment) {
+App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment, $filter) {
     
     var dataMatch = function(scope,type){
         
@@ -218,6 +218,7 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment) {
 
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = '-msd';
+                            scope.matchsTemporary = $filter('orderBy')(scope.matchsTemporary, '-msd');
 
                         }
                     }
