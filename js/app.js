@@ -32,12 +32,12 @@ App.config(
         })
         
         //comming soon page
-        .when('/comsoon', {
+        .when('/upcoming', {
             title: 'Upcoming',
             description: 'Upcoming matchs football',
-            templateUrl: 'partials/comsoon.html',
-            controller: 'comsoonCtrl',
-            activetab: 'comsoon'
+            templateUrl: 'partials/upcoming.html',
+            controller: 'upcomingCtrl',
+            activetab: 'upcoming'
         })
         
         //watch page
@@ -222,7 +222,7 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment, $filter)
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = 'msd';
 
-                        } else if ( d<0 && type=='comsoon' ) {
+                        } else if ( d<0 && type=='upcoming' ) {
 
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = 'msd';
@@ -319,11 +319,11 @@ App.controller('liveCtrl', function($scope, $http, dataMatch) { //d<=6000000 && 
     
 });
 
-//-- COMING SOON
+//-- UPCOMING
 
-App.controller('comsoonCtrl', function($scope, $http, dataMatch) { //d<0
+App.controller('upcomingnCtrl', function($scope, $http, dataMatch) { //d<0
     
-    new dataMatch($scope,'comsoon');
+    new dataMatch($scope,'upcoming');
     
 });
 
@@ -393,7 +393,7 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
         } else if (d<=6000000 && d>=0){
             $scope.watchback = '#live'; 
         } else if (d<0) {
-            $scope.watchback = '#comsoon'; 
+            $scope.watchback = '#upcoming'; 
             $scope.layer = true;
         } else {
             $scope.watchback = '#/'; 

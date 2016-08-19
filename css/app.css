@@ -109,6 +109,55 @@ and open the template in the editor.
 .modal-menu .content .table-view-menu .table-view-cell.active {
     background: #eee;
 }
+
+.modal-menu .content .table-view-menu .table-view-cell-download {
+    font-size: 0;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .tvdc-col {
+    width: 33.33%;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 40px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    opacity: 0.9;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .tvdc-col:hover {
+    opacity: 1;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .tvdc-col.tvcd-android {
+    background: #46cb46;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .tvdc-col.tvcd-apple {
+    background: #c8c8c8;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .tvdc-col.tvcd-windowsphone {
+    background: #1969fb;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .tvdc-col .tvcd-label {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    overflow: hidden;
+    font-size: 10px;
+    height: 15px;
+    width: 80%;
+    line-height: 15px;
+    z-index: 3;
+    background: transparent;
+    border-radius: 2px;
+    color: #fff;
+}
+.modal-menu .content .table-view-menu .table-view-cell-download .icon {
+    font-size: 40px;
+    color: #fff;
+    z-index: 2;
+}
+
+
 /* CONTENT */
 
 .bar-nav-secondary ~ .content {

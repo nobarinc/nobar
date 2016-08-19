@@ -11,12 +11,20 @@
         </div>
         <ul class="table-view table-view-menu">
             <li class="table-view-cell table-view-divider">Download</li>
-            <li>
-                <a href="{{$root.androidApk}}" target="_blank">
+            <li class="table-view-cell-download tvcd-android">
+                <a href="{{$root.androidApk}}" target="_blank" class="tvdc-col tvcd-android">
                     <span class="icon ion-social-android"></span>
                 </a>
+                <a target="_blank" class="tvdc-col tvcd-apple">
+                    <span class="icon ion-social-apple"></span>
+                    <span class="tvcd-label">soon</span>
+                </a>
+                <a target="_blank" class="tvdc-col tvcd-windowsphone">
+                    <span class="icon ion-social-windows"></span>
+                    <span class="tvcd-label">soon</span>
+                </a>
             </li>
-            <li class="table-view-cell table-view-divider">Disclaim</li>
+            <li class="table-view-cell table-view-divider">Rules</li>
             <li class="table-view-cell" ng-class="{active: $root.activetab == 'privacy'}">
                 <a href="#privacy" class="navigate-right">
                     Privacy
