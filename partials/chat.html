@@ -1,5 +1,5 @@
 <div class="chatbox" ng-controller="chatCtrl">
-    <div class="chatbox-auth" ng-hide="myteam">
+    <div class="chatbox-auth" ng-hide="myteam" ng-if="!myteam">
         <div>
             <span class="h3">Who are you ?</span>
         </div>
@@ -35,7 +35,7 @@
         <form ng-submit="sendMessage()" class="form-send">
             <input ng-model="messageContent" class="textbox" placeholder="Type something ..."/>
             <button class="btn btn-primary">
-                <span class="icon ion-android-upload"></span>
+                <span class="icon ion-paper-airplane"></span>
             </button>
         </form>
     </div>

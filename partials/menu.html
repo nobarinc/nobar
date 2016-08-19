@@ -10,6 +10,13 @@
             Hi, what do you need ?
         </div>
         <ul class="table-view table-view-menu">
+            <li class="table-view-cell table-view-divider">Download</li>
+            <li>
+                <a href="{{$root.androidApk}}" target="_blank">
+                    <span class="icon ion-social-android"></span>
+                </a>
+            </li>
+            <li class="table-view-cell table-view-divider">Disclaim</li>
             <li class="table-view-cell" ng-class="{active: $root.activetab == 'privacy'}">
                 <a href="#privacy" class="navigate-right">
                     Privacy

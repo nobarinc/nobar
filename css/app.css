@@ -173,6 +173,15 @@ and open the template in the editor.
     margin-top: 50px;
 }
 
+.card-home-body .col-download .cd-title {
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.card-home-body .col-download .icon {
+    font-size: 50px;
+}
+
 .card-home-footer {
     margin-top: 50px;
     text-align: center;
@@ -317,6 +326,7 @@ and open the template in the editor.
     width: 70%;
     display: inline-block;
     vertical-align: top;
+    overflow: hidden;
 }
 .content-watch .content-watch-body.fit {
     width: 100%;
@@ -363,6 +373,7 @@ and open the template in the editor.
     vertical-align: bottom;
     background: #fff;
     height: 100%;
+    overflow: hidden;
 }
 
 .coming-soon-layer {
@@ -396,11 +407,12 @@ and open the template in the editor.
     position: relative;
     width: 100%;
     height: 90%;
-    border-bottom: 1px solid #ddd;
+    /*border-bottom: 1px solid #ddd;*/
     font-size: 13px;
     padding-top: 20px;
     overflow: auto;
-    background-color: #fff;
+    background-color: #0E0E0E;
+    color: #fff;
     background-image: url("../images/ap/supporters.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -470,6 +482,7 @@ and open the template in the editor.
     position: relative;
     width: 100%;
     height: 10%;
+    min-height: 50px;
 }
 
 .chatbox .chatbox-footer .form-send {
@@ -480,7 +493,8 @@ and open the template in the editor.
 .chatbox .chatbox-footer .form-send .textbox {
     width: 85%;
     height: 100%;
-    background: #eee;
+    background: #181818;
+    color: #fff;
     border: none;
     margin: 0;
     float: left;
@@ -500,7 +514,8 @@ and open the template in the editor.
     left: 0;
     right: 0;
     margin: auto;
-    background: #fff;
+    background: #121212;
+    color: #fff;
     z-index: 1;
     padding-top: 20%;
     font-size: 15px;

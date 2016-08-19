@@ -7,7 +7,7 @@ App.config(
         
         //home page
         .when('/', {
-            title: 'Nobar',
+            title: 'Nobar - Live & Highlight Football',
             description: 'Awesome live & highlight football streaming app',
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl'
@@ -94,30 +94,34 @@ App.config(
         //images team base
         $provide.value("imageTeamBase", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
     
+        $provide.value("androidApk", "http://cdn.nobar.co/mobile_app_installer/NobarInc.apk");
     
     }
 );
 
-App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', function($location, $rootScope, imageTeamBase, clock) {
+App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk',
+    function($location, $rootScope, imageTeamBase, clock, androidApk) {
         
-    $rootScope
-    
-        .$on('$routeChangeSuccess', function (event, current, previous) {
+        $rootScope
 
-            if (current.hasOwnProperty('$$route')) {
-                $rootScope.title = current.$$route.title;
-                $rootScope.description = current.$$route.description;
-                $rootScope.activetab = current.$$route.activetab;
-                $rootScope.imageTeamBase = imageTeamBase;
-                $rootScope.queryMatchs = '';
-                $rootScope.modalMenu = false;
-            }
+            .$on('$routeChangeSuccess', function (event, current, previous) {
 
-        });
-    
-    new clock($rootScope);
-        
-}]);
+                if (current.hasOwnProperty('$$route')) {
+                    $rootScope.title = current.$$route.title;
+                    $rootScope.description = current.$$route.description;
+                    $rootScope.activetab = current.$$route.activetab;
+                    $rootScope.imageTeamBase = imageTeamBase;
+                    $rootScope.queryMatchs = '';
+                    $rootScope.modalMenu = false;
+                    $rootScope.androidApk = androidApk;
+                }
+
+            });
+
+        new clock($rootScope);
+
+    }
+]);
 
 App.directive('backButton', function(){
     return {
