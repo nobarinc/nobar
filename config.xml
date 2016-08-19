@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<widget id="co.nobar.www" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="co.nobar.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
 
     <name>Nobar Inc</name>
 
     <description>
-        Awesome Live & Highlight Football Streaming Application
+        Awesome Live and Highlight Football Streaming Application
     </description>
 
     <author href="http://nobar.co" email="nobarinc@gmail.com">
