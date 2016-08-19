@@ -321,7 +321,7 @@ App.controller('liveCtrl', function($scope, $http, dataMatch) { //d<=6000000 && 
 
 //-- UPCOMING
 
-App.controller('upcomingnCtrl', function($scope, $http, dataMatch) { //d<0
+App.controller('upcomingCtrl', function($scope, $http, dataMatch) { //d<0
     
     new dataMatch($scope,'upcoming');
     
