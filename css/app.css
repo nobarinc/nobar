@@ -774,6 +774,10 @@ and open the template in the editor.
         height: 100%;
     }
     
+    .coming-soon-layer {
+        width: 99%;
+    }
+    
 }
 
 /* ANIMATION */
