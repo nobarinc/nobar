@@ -14,8 +14,9 @@
 </header>
 <div class="content content-watch">
     <div class="content-watch-body" ng-class="{fit : watchSidebar==false}">
-        <div class="coming-soon-layer" ng-if="layer">
+        <div class="coming-soon-layer" ng-if="layer" ng-class="{hide : cslhide}">
             <span>Streaming is available 10 minutes before match.</span>
+            <span class="btn btn-close" ng-click="cslhide=true">×</span>
         </div>
         <iframe id="playerarea" class="frame-watch" ng-if="match.url[0].urlk!=0" scrolling=no frameborder=0 scrolling=no allowtransparency=true  webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <span class="spinner" ng-hide="loaded"></span>
