@@ -353,8 +353,9 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
                         $scope.match = response[i];
                         $scope.urls = response[i]["url"];
                         $scope.goBackWatch(response[i]['msd']);
-                        $rootScope.title = 'Watch '+ response[i]['mta']['tnm'] +' v '+ response[i]['mth']['tnm']+' '+ response[i]['msd'];
-                        $rootScope.description = 'Watch '+ response[i]['mth']['tnm'] +' v '+ response[i]['mta']['tnm']+' '+ response[i]['msd'];
+                        var wt = 'Watch '+ response[i]['mth']['tnm'] +' v '+ response[i]['mta']['tnm']+' '+ response[i]['msd'];
+                        $rootScope.title = wt;
+                        $rootScope.description = wt;
                     }
                 }
                 angular.element(document.querySelector('#playerarea')).ready(function () {
