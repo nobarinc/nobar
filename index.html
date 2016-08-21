@@ -6,8 +6,31 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-        <meta name="description" content="{{description}}"/>
         <meta name="keywords" content="live football,highlight football,nobar,streaming"/>
+        
+        <meta name="fragment" content="!">
+        <meta name="robots" content="{{metaRobots}}" />
+        <meta name="description" content="{{metaDescription}}" />
+        <link rel="canonical" ng-href="{{canonicalUrl}}" />
+        <link ng-if="relPrevLink()" rel="prev" ng-href="{{relPrevLink()}}" />
+        <link ng-if="relNextLink()" rel="next" ng-href="{{relNextLink()}}" />
+        
+        <!--TWITTER META-->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@nobarinc">
+        <meta name="twitter:title" content="Nobar - Live and Highlight Football">
+        <meta name="twitter:description" content="{{metaDescription}}" />
+        <meta name="twitter:creator" content="@nobarinc">
+        <meta name="twitter:image:src" content="{{imageSrc}}" />
+        
+        <!--FACEBOOK/OTHER META -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="{{title}}" />
+        <meta property="og:url" content="{{canonicalUrl}}" />
+        <meta property="og:image" content="{{imageSrc}}" />
+        <meta property="og:site_name" content="Nobar - Live and Highlight Football" />
+        <meta property="og:description" content="{{metaDescription}}" />
+        
         <link rel="icon" ng-href="images/ap/icon.png" />
         <link rel="stylesheet" href="libs/ratchet-2.0.2/dist/css/ratchet.min.css" type="text/css" />
         <link rel="stylesheet" href="libs/ionicons-2.0.1/css/ionicons.min.css" type="text/css" />
