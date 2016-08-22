@@ -227,7 +227,7 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment, $filter)
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = 'msd';
 
-                        } else if ( d>120 && type=='highlight' ) {
+                        } else if ( d>120 && type=='highlight' && response[i]["url"][0]["urlk"]!="no video" ) {
 
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = '-msd';
