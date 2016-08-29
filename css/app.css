@@ -347,6 +347,8 @@ and open the template in the editor.
 .bar-watch {
     left: 0;
     right: 0;
+    background-color: #000;
+    border: none;
 }
 
 .segmented-control-watch {
@@ -354,11 +356,31 @@ and open the template in the editor.
 }
 
 .title-watch {
-    color: #000;
+    color: #fff;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 50px;
     /*text-shadow: 0 0 10px #09c;*/
 }
 .title-watch strong {
-    color: #000;
+    color: #fff;
+}
+
+.bar .toggle-chat,
+.bar .toggle-chat.active {
+    border-radius: 3px;
+    margin: 6.5px;
+    height: 27px;
+}
+
+.toggle-chat:before {
+    top: 1.5px;
+}
+
+.bar .toggle-chat .toggle-handle,
+.bar .toggle-chat.active .toggle-handle {
+    height: 25px;
+    border-radius: 3px;
 }
 
 .card-watch {

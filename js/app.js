@@ -1,4 +1,6 @@
-var App = angular.module('App', ['ngRoute' , 'ngAnimate' , 'pubnub.angular.service', 'angularMoment']);
+var App = angular.module('App', 
+    ['ngRoute' , 'ngAnimate' , 'pubnub.angular.service', 'angularMoment']
+);
 
 App.config(
     function($routeProvider, $locationProvider, $provide, $httpProvider) {
@@ -77,7 +79,7 @@ App.config(
         });
         
         // use the HTML5 History API
-        //$locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(false).hashPrefix('!');
         
         //initialize get if not there
         /*
@@ -99,29 +101,47 @@ App.config(
     }
 );
 
-App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk',
-    function($location, $rootScope, imageTeamBase, clock, androidApk) {
+App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$window', 'metaDescription',
+    function($location, $rootScope, imageTeamBase, clock, androidApk, $window, metaDescription) {
         
-        $rootScope
+        $rootScope.$on('$routeChangeStart', function(){
+                
+            //here when route start event
 
-            .$on('$routeChangeSuccess', function (event, current, previous) {
+        });
+            
+        $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
-                if (current.hasOwnProperty('$$route')) {
-                    $rootScope.title = current.$$route.title;
-                    $rootScope.description = current.$$route.description;
-                    $rootScope.activetab = current.$$route.activetab;
-                    $rootScope.imageTeamBase = imageTeamBase;
-                    $rootScope.queryMatchs = '';
-                    $rootScope.modalMenu = false;
-                    $rootScope.androidApk = androidApk;
-                }
+            if (current.hasOwnProperty('$$route')) {
+                $rootScope.title = current.$$route.title;
+                $rootScope.description = new metaDescription(current.$$route.description);
+                $rootScope.activetab = current.$$route.activetab;
+                $rootScope.imageTeamBase = imageTeamBase;
+                $rootScope.queryMatchs = '';
+                $rootScope.modalMenu = false;
+                $rootScope.androidApk = androidApk;
+                $window.ga('send', 'pageview', $location.path()); //google analytics
+            }
 
-            });
+        });
 
         new clock($rootScope);
+        
+        $window.ga('create', 'UA-82746355-1', 'auto'); //google analytics
 
     }
 ]);
+
+App.factory('metaDescription',function(){
+    return function(value){
+        var meta = document.getElementsByTagName("meta");
+        for (var i=0; i<meta.length; i++) {
+            if (meta[i].name.toLowerCase()=="description") {
+                meta[i].content = value;
+            }
+        }
+    };
+});
 
 App.directive('backButton', function(){
     return {
@@ -337,7 +357,7 @@ App.controller('highlightCtrl', function($scope, $http, dataMatch) { //d>6000000
 
 //-- WATCH
 
-App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $window, $rootScope) {
+App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $window, $rootScope, metaDescription) {
     
     $scope.loadloop = 0;
     
@@ -355,7 +375,7 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
                         $scope.goBackWatch(response[i]['msd']);
                         var wt = 'Watch '+ response[i]['mth']['tnm'] +' v '+ response[i]['mta']['tnm']+' '+ response[i]['msd'];
                         $rootScope.title = wt;
-                        $rootScope.description = wt;
+                        $rootScope.description = new metaDescription(wt);
                     }
                 }
                 angular.element(document.querySelector('#playerarea')).ready(function () {
@@ -390,14 +410,14 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
     $scope.goBackWatch = function(msd){
         var d = (new Date() - new Date(msd.replace(/-/g,'/')));
         if (d>6000000){
-            $scope.watchback = '#highlight'; 
+            $scope.watchback = '#!/highlight'; 
         } else if (d<=6000000 && d>=0){
-            $scope.watchback = '#live'; 
+            $scope.watchback = '#!/live'; 
         } else if (d<0) {
-            $scope.watchback = '#upcoming'; 
+            $scope.watchback = '#!/upcoming'; 
             $scope.layer = true;
         } else {
-            $scope.watchback = '#/'; 
+            $scope.watchback = '#!/'; 
         }
     };
     

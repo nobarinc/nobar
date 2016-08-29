@@ -2,12 +2,12 @@
     <a href="{{watchback}}" class="pull-left">
         <span class="icon icon-left-nav"></span>
     </a>
-    <h1 class="title title-watch">{{match.mth.tnm}} <strong>v</strong> {{match.mta.tnm}}</h1>
-    <a class="toggle pull-right cursor-pointer" ng-click="watchSidebarShow()" ng-class="{active : watchSidebar}">
+    <h1 class="title title-watch pull-left">{{match.mth.tnm}} <strong>{{match.mgh}} v {{match.mga}}</strong> {{match.mta.tnm}}</h1>
+    <a class="toggle pull-right cursor-pointer toggle-chat" ng-click="watchSidebarShow()" ng-class="{active : watchSidebar}">
         <div class="toggle-handle"></div>
     </a>
     <div class="segmented-control segmented-control-watch pull-right">
-        <a href="#watch/{{match.mid}}/{{$index+1}}" class="control-item cursor-pointer " ng-repeat="url in urls" ng-class="{active: server == $index+1}">
+        <a href="#!/watch/{{match.mid}}/{{$index+1}}" class="control-item cursor-pointer " ng-repeat="url in urls" ng-class="{active: server == $index+1}">
             Server {{$index+1}}
         </a>
     </div>
