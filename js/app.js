@@ -10,7 +10,7 @@ App.config(
         //home page
         .when('/', {
             title: 'Nobar - Live & Highlight Football',
-            description: 'Awesome live & highlight football streaming app',
+            description: 'Awesome live & highlight football streaming website',
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl'
         })
