@@ -104,7 +104,7 @@ App.config(
 App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$window', 'metaDescription',
     function($location, $rootScope, imageTeamBase, clock, androidApk, $window, metaDescription) {
         
-        $rootScope.$on('$routeChangeStart', function(){
+        $rootScope.$on('$routeChangeStart', function(event, current, previous){
                 
             //here when route start event
             $rootScope.description = new metaDescription(current.$$route.description);
