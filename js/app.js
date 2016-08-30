@@ -107,6 +107,7 @@ App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$wi
         $rootScope.$on('$routeChangeStart', function(){
                 
             //here when route start event
+            $rootScope.description = new metaDescription(current.$$route.description);
 
         });
             
@@ -114,7 +115,6 @@ App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$wi
 
             if (current.hasOwnProperty('$$route')) {
                 $rootScope.title = current.$$route.title;
-                $rootScope.description = new metaDescription(current.$$route.description);
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
                 $rootScope.queryMatchs = '';
