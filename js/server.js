@@ -12,7 +12,7 @@ var app = module.exports = express();
 
 // This will ensure that all routing is handed over to AngularJS
 app.get('*', function(req, res){
-	res.sendfile('../index.html');
+	res.sendfile('http://www.nobar.co/index.html');
 });
 
 app.listen(80);
