@@ -79,7 +79,8 @@ App.config(
         });
         
         // use the HTML5 History API
-        $locationProvider.html5Mode(false).hashPrefix('!');
+        //$locationProvider.html5Mode(false);
+        $locationProvider.hashPrefix('!');
         
         //initialize get if not there
         /*
@@ -103,18 +104,18 @@ App.config(
 
 App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$window', 'metaDescription',
     function($location, $rootScope, imageTeamBase, clock, androidApk, $window, metaDescription) {
-        
+        /*
         $rootScope.$on('$routeChangeStart', function(event, current, previous){
                 
             //here when route start event
-            $rootScope.description = new metaDescription(current.$$route.description);
-
-        });
             
+        });
+        */    
         $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
 
             if (current.hasOwnProperty('$$route')) {
                 $rootScope.title = current.$$route.title;
+                $rootScope.description = new metaDescription(current.$$route.description);
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
                 $rootScope.queryMatchs = '';
