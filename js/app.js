@@ -11,6 +11,7 @@ App.config(
         .when('/', {
             title: 'Nobar - Live & Highlight Football',
             description: 'Awesome live & highlight football streaming website',
+            canonicalUrl: '/',
             templateUrl: 'partials/home.html',
             controller: 'homeCtrl'
         })
@@ -19,6 +20,7 @@ App.config(
         .when('/live', {
             title: 'Live',
             description: 'Watch live streaming football',
+            canonicalUrl: '#!/live',
             templateUrl: 'partials/live.html',
             controller: 'liveCtrl',
             activetab: 'live'
@@ -28,6 +30,7 @@ App.config(
         .when('/highlight', {
             title: 'Highlight',
             description: 'Watch the latest football highlights',
+            canonicalUrl: '#!/highlight',
             templateUrl: 'partials/highlight.html',
             controller: 'highlightCtrl',
             activetab: 'highlight'
@@ -37,6 +40,7 @@ App.config(
         .when('/upcoming', {
             title: 'Upcoming',
             description: 'Upcoming matchs football',
+            canonicalUrl: '#!/upcoming',
             templateUrl: 'partials/upcoming.html',
             controller: 'upcomingCtrl',
             activetab: 'upcoming'
@@ -54,6 +58,7 @@ App.config(
         .when('/privacy', {
             title: 'Privacy',
             description: 'Privacy',
+            canonicalUrl: '#!/privacy',
             templateUrl: 'partials/privacy.html',
             activetab : 'privacy'
         })
@@ -62,6 +67,7 @@ App.config(
         .when('/policyandsafety', {
             title: 'Policy and Safety',
             description: 'Policy and Safety',
+            canonicalUrl: '#!/policyandsafety',
             templateUrl: 'partials/policyandsafety.html',
             activetab : 'policyandsafety'
         })
@@ -70,6 +76,7 @@ App.config(
         .when('/contactus', {
             title: 'Contact us',
             description: 'We welcome problem reports, feature ideas and general comments',
+            canonicalUrl: '#!/contactus',
             templateUrl: 'partials/contactus.html',
             activetab : 'contactus'
         })
@@ -115,7 +122,9 @@ App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$wi
 
             if (current.hasOwnProperty('$$route')) {
                 $rootScope.title = current.$$route.title;
-                $rootScope.description = new metaDescription(current.$$route.description);
+                $rootScope.description = current.$$route.description;
+                $rootScope.canonicalUrl = current.$$route.canonicalUrl;
+                new metaDescription(current.$$route.description);
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
                 $rootScope.queryMatchs = '';
@@ -371,12 +380,17 @@ App.controller('watchCtrl', function($scope, $routeParams, $http, apiMatch, $win
             .success(function(response) { 
                 for(var i=0; i<response.length; i++){
                     if (response[i]["mid"] == $routeParams.id){
+                        
                         $scope.match = response[i];
                         $scope.urls = response[i]["url"];
                         $scope.goBackWatch(response[i]['msd']);
                         var wt = 'Watch '+ response[i]['mth']['tnm'] +' v '+ response[i]['mta']['tnm']+' '+ response[i]['msd'];
+                        
                         $rootScope.title = wt;
-                        $rootScope.description = new metaDescription(wt);
+                        $rootScope.description = wt;
+                        new metaDescription(wt);
+                        $rootScope.canonicalUrl = "#!/watch/"+response[i]['mid']+"/1";
+                        
                     }
                 }
                 angular.element(document.querySelector('#playerarea')).ready(function () {
