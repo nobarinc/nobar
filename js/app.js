@@ -109,8 +109,8 @@ App.config(
     }
 );
 
-App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$window', 'metaDescription',
-    function($location, $rootScope, imageTeamBase, clock, androidApk, $window, metaDescription) {
+App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$window', 'metaDescription', 'metaTitle',
+    function($location, $rootScope, imageTeamBase, clock, androidApk, $window, metaDescription, metaTitle) {
         /*
         $rootScope.$on('$routeChangeStart', function(event, current, previous){
                 
@@ -124,6 +124,7 @@ App.run(['$location', '$rootScope', 'imageTeamBase', 'clock', 'androidApk', '$wi
                 $rootScope.title = current.$$route.title;
                 $rootScope.description = current.$$route.description;
                 $rootScope.canonicalUrl = current.$$route.canonicalUrl;
+                new metaTitle(current.$$route.title);
                 new metaDescription(current.$$route.description);
                 $rootScope.activetab = current.$$route.activetab;
                 $rootScope.imageTeamBase = imageTeamBase;
@@ -146,7 +147,20 @@ App.factory('metaDescription',function(){
     return function(value){
         var meta = document.getElementsByTagName("meta");
         for (var i=0; i<meta.length; i++) {
-            if (meta[i].name.toLowerCase()=="description") {
+            var n = meta[i].name.toLowerCase();
+            if ( n == "description" || n == "twitter:description" || n == "og:description" ) {
+                meta[i].content = value;
+            }
+        }
+    };
+});
+
+App.factory('metaTitle',function(){
+    return function(value){
+        var meta = document.getElementsByTagName("meta");
+        for (var i=0; i<meta.length; i++) {
+            var n = meta[i].name.toLowerCase();
+            if ( n == "twitter:title" || n == "og:title" ) {
                 meta[i].content = value;
             }
         }
