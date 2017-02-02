@@ -271,7 +271,7 @@ App.factory("dataMatch", function ($http, apiMatch, $rootScope, moment, $filter)
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = 'msd';
 
-                        } else if ( d>120 && type=='highlight' && response[i]["url"][0]["urlk"]!="unavailable" && response[i]["url"][0]["urlk"]!="" ) {
+                        } else if ( d>120 && type=='highlight' && response[i]["url"][0]["urlk"]!="unavailable" && response[i]["url"][0]["urlk"]!="0" && response[i]["url"][0]["urlk"]!="" ) {
 
                             scope.matchsTemporary.push(response[i]);
                             scope.matchorderby = '-msd';
