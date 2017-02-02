@@ -99,10 +99,10 @@ App.config(
         $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
         */
         //API match
-        $provide.value("apiMatch", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/json/match.json");
+        $provide.value("apiMatch", "json/match.json");
         
         //images team base
-        $provide.value("imageTeamBase", "https://d23de2bd771bf67c2ab71ee0655bcfd51f30f374.googledrive.com/host/0B2xjQ4obRNG9SkU4MnNPWFNaZGM/images/team/");
+        $provide.value("imageTeamBase", "images/team/");
     
         $provide.value("androidApk", "http://cdn.nobar.co/mobile_app_installer/NobarInc.apk");
     
